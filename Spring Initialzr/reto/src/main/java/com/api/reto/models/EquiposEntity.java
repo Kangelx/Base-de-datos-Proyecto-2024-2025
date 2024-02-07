@@ -7,7 +7,11 @@ import java.sql.Date;
 @Entity
 @Table(name = "equipos", schema = "tic_incidencias", catalog = "")
 public class EquiposEntity {
+<<<<<<< HEAD
    /* public enum TipoEquipoEnum {
+=======
+    public enum TipoEquipoEnum {
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
         altavoces,
         impresora,
         monitor,
@@ -15,6 +19,7 @@ public class EquiposEntity {
         portátil_de_aula,
         portátil_Consejería,
         proyector
+<<<<<<< HEAD
     }*/
 
     @Id
@@ -24,6 +29,16 @@ public class EquiposEntity {
   /*  @Enumerated(EnumType.ORDINAL)
     @Column(name = "tipo_equipo", nullable = false)*/
     private Byte tipoEquipo;
+=======
+    }
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @Column(name = "id", nullable = false)
+    private int id;
+    @Basic
+    @Column(name = "tipo_equipo", nullable = false)
+    private TipoEquipoEnum tipoEquipo;
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
     @Basic
     @Column(name = "fecha_adquisicion", nullable = true)
     private Date fechaAdquisicion;
@@ -58,11 +73,19 @@ public class EquiposEntity {
         this.id = id;
     }
 
+<<<<<<< HEAD
     public Byte getTipoEquipo() {
         return tipoEquipo;
     }
 
     public void setTipoEquipo(Byte tipoEquipo) {
+=======
+    public Object getTipoEquipo() {
+        return tipoEquipo;
+    }
+
+    public void setTipoEquipo(TipoEquipoEnum tipoEquipo) {
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
         this.tipoEquipo = tipoEquipo;
     }
 

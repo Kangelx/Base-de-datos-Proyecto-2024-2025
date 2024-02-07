@@ -22,6 +22,7 @@ public class IncidenciasEntity {
         resuelta,
         cerrada
     }
+<<<<<<< HEAD
     public enum PrioridadEnum
     {
         baja,
@@ -29,6 +30,8 @@ public class IncidenciasEntity {
         alta,
         critica
     }
+=======
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "num", nullable = false)
@@ -37,7 +40,11 @@ public class IncidenciasEntity {
     @Column(name = "tipo", nullable = false)
     private TipoEnum tipo;
     @ManyToOne
+<<<<<<< HEAD
     @JoinColumn(name = "subtipo_id",foreignKey = @ForeignKey(name="FK_INCIDENCIA_INCIDENCIASUBTIPO"))
+=======
+    @JoinColumn(name = "subtipo",foreignKey = @ForeignKey(name="FK_INCIDENCIA_INCIDENCIASUBTIPO"))
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
     private IncidenciasSubtiposEntity subtipoId;
     @Basic
     @Column(name = "fecha_creacion", nullable = false)
@@ -63,9 +70,12 @@ public class IncidenciasEntity {
     @ManyToOne
     @JoinColumn(name = "equipo_id",foreignKey = @ForeignKey(name="FK_EQUIPO_INCIDENCIA"))
     private EquiposEntity equipoId;
+<<<<<<< HEAD
     @Basic
     @Column(name = "prioridad", nullable = false)
     private PrioridadEnum prioridad;
+=======
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
 
     public int getNum() {
         return num;
@@ -75,7 +85,11 @@ public class IncidenciasEntity {
         this.num = num;
     }
 
+<<<<<<< HEAD
     public TipoEnum getTipo() {
+=======
+    public Object getTipo() {
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
         return tipo;
     }
 
@@ -115,7 +129,11 @@ public class IncidenciasEntity {
         this.descripcion = descripcion;
     }
 
+<<<<<<< HEAD
     public EstadoEnum getEstado() {
+=======
+    public Object getEstado() {
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
         return estado;
     }
 
@@ -154,6 +172,7 @@ public class IncidenciasEntity {
     public void setEquipoId(EquiposEntity equipoId) {
         this.equipoId = equipoId;
     }
+<<<<<<< HEAD
 
     public PrioridadEnum getPrioridad() {
         return prioridad;
@@ -162,4 +181,6 @@ public class IncidenciasEntity {
     public void setPrioridad(PrioridadEnum prioridad) {
         this.prioridad = prioridad;
     }
+=======
+>>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
 }
