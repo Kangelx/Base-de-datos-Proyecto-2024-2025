@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "aulas", schema = "tic_incidencias", catalog = "")
 public class AulasEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
     @Column(name = "num", nullable = false)
     private int num;

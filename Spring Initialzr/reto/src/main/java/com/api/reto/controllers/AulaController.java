@@ -3,7 +3,9 @@ package com.api.reto.controllers;
 
 import com.api.reto.models.AulasEntity;
 import com.api.reto.services.AulaService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -36,14 +38,15 @@ public class AulaController {
         return this.aulaService.updateById(request, id);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/del{id}")
+
     public String deleteById(@PathVariable("id") Integer id) {
         boolean ok = this.aulaService.deleteAula(id);
         if (ok) {
             return "Aula con id " + id + " borrado.";
-        }else{
-            return "Error, no se encuentra el aula con id "+id+".";
+        } else {
+            return "Error, no se encuentra el aula con id " + id + ".";
         }
-
     }
+
 }

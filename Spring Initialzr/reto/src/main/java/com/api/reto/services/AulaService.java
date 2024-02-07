@@ -28,6 +28,7 @@ public class AulaService {
         aula.setNum(request.getNum());
         aula.setCodigo(request.getCodigo());
         aula.setPlanta(request.getPlanta());
+        aulaRepository.save(aula);
         return aula;
     }
     public Boolean deleteAula(Integer id){
