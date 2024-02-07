@@ -23,7 +23,7 @@ public class AulaController {
         return this.aulaService.getAulas();
     }
 
-    @PostMapping
+    @PostMapping(path = "/post")
     public AulasEntity saveAula(@RequestBody AulasEntity aula) {
         return this.aulaService.saveAula(aula);
     }
@@ -33,7 +33,7 @@ public class AulaController {
         return this.aulaService.getById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/put{id}")
     public AulasEntity updateAulaById(@RequestBody AulasEntity request, @PathVariable Integer id) {
         return this.aulaService.updateById(request, id);
     }

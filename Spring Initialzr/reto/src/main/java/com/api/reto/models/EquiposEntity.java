@@ -7,7 +7,7 @@ import java.sql.Date;
 @Entity
 @Table(name = "equipos", schema = "tic_incidencias", catalog = "")
 public class EquiposEntity {
-    public enum TipoEquipoEnum {
+   /* public enum TipoEquipoEnum {
         altavoces,
         impresora,
         monitor,
@@ -15,14 +15,15 @@ public class EquiposEntity {
         portátil_de_aula,
         portátil_Consejería,
         proyector
-    }
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    }*/
+
     @Id
     @Column(name = "id", nullable = false)
     private int id;
-    @Basic
-    @Column(name = "tipo_equipo", nullable = false)
-    private TipoEquipoEnum tipoEquipo;
+    @Transient
+  /*  @Enumerated(EnumType.ORDINAL)
+    @Column(name = "tipo_equipo", nullable = false)*/
+    private Byte tipoEquipo;
     @Basic
     @Column(name = "fecha_adquisicion", nullable = true)
     private Date fechaAdquisicion;
@@ -57,11 +58,11 @@ public class EquiposEntity {
         this.id = id;
     }
 
-    public Object getTipoEquipo() {
+    public Byte getTipoEquipo() {
         return tipoEquipo;
     }
 
-    public void setTipoEquipo(TipoEquipoEnum tipoEquipo) {
+    public void setTipoEquipo(Byte tipoEquipo) {
         this.tipoEquipo = tipoEquipo;
     }
 

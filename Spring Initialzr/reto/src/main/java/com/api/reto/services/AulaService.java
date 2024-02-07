@@ -13,17 +13,20 @@ public class AulaService {
     @Autowired
     IAulaRepository aulaRepository;
 
-    public ArrayList<AulasEntity>getAulas(){
+    public ArrayList<AulasEntity> getAulas() {
         return (ArrayList<AulasEntity>) aulaRepository.findAll();
     }
-    public AulasEntity saveAula(AulasEntity aula){
+
+    public AulasEntity saveAula(AulasEntity aula) {
         return aulaRepository.save(aula);
     }
-    public Optional<AulasEntity>getById(Integer id){
+
+    public Optional<AulasEntity> getById(Integer id) {
         return aulaRepository.findById(id);
     }
-    public AulasEntity updateById(AulasEntity request,Integer id){
-        AulasEntity aula=aulaRepository.findById(id).get();
+
+    public AulasEntity updateById(AulasEntity request, Integer id) {
+        AulasEntity aula = aulaRepository.findById(id).get();
         aula.setDescripcion(request.getDescripcion());
         aula.setNum(request.getNum());
         aula.setCodigo(request.getCodigo());
@@ -31,11 +34,12 @@ public class AulaService {
         aulaRepository.save(aula);
         return aula;
     }
-    public Boolean deleteAula(Integer id){
-        try{
+
+    public Boolean deleteAula(Integer id) {
+        try {
             aulaRepository.deleteById(id);
             return true;
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

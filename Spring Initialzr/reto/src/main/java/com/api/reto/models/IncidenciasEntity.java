@@ -22,6 +22,13 @@ public class IncidenciasEntity {
         resuelta,
         cerrada
     }
+    public enum PrioridadEnum
+    {
+        baja,
+        media,
+        alta,
+        critica
+    }
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "num", nullable = false)
@@ -30,7 +37,7 @@ public class IncidenciasEntity {
     @Column(name = "tipo", nullable = false)
     private TipoEnum tipo;
     @ManyToOne
-    @JoinColumn(name = "subtipo",foreignKey = @ForeignKey(name="FK_INCIDENCIA_INCIDENCIASUBTIPO"))
+    @JoinColumn(name = "subtipo_id",foreignKey = @ForeignKey(name="FK_INCIDENCIA_INCIDENCIASUBTIPO"))
     private IncidenciasSubtiposEntity subtipoId;
     @Basic
     @Column(name = "fecha_creacion", nullable = false)
@@ -56,6 +63,9 @@ public class IncidenciasEntity {
     @ManyToOne
     @JoinColumn(name = "equipo_id",foreignKey = @ForeignKey(name="FK_EQUIPO_INCIDENCIA"))
     private EquiposEntity equipoId;
+    @Basic
+    @Column(name = "prioridad", nullable = false)
+    private PrioridadEnum prioridad;
 
     public int getNum() {
         return num;
@@ -65,7 +75,7 @@ public class IncidenciasEntity {
         this.num = num;
     }
 
-    public Object getTipo() {
+    public TipoEnum getTipo() {
         return tipo;
     }
 
@@ -105,7 +115,7 @@ public class IncidenciasEntity {
         this.descripcion = descripcion;
     }
 
-    public Object getEstado() {
+    public EstadoEnum getEstado() {
         return estado;
     }
 
@@ -143,5 +153,13 @@ public class IncidenciasEntity {
 
     public void setEquipoId(EquiposEntity equipoId) {
         this.equipoId = equipoId;
+    }
+
+    public PrioridadEnum getPrioridad() {
+        return prioridad;
+    }
+
+    public void setPrioridad(PrioridadEnum prioridad) {
+        this.prioridad = prioridad;
     }
 }
