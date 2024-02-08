@@ -15,6 +15,9 @@ public class AulaService {
 
 <<<<<<< HEAD
     public ArrayList<AulasEntity> getAulas() {
+=======
+<<<<<<< HEAD
+    public ArrayList<AulasEntity> getAulas() {
         return (ArrayList<AulasEntity>) aulaRepository.findAll();
     }
 
@@ -30,17 +33,26 @@ public class AulaService {
         AulasEntity aula = aulaRepository.findById(id).get();
 =======
     public ArrayList<AulasEntity>getAulas(){
+>>>>>>> c0f9bb5a87bba794458de9efb89eda964d78be69
         return (ArrayList<AulasEntity>) aulaRepository.findAll();
     }
-    public AulasEntity saveAula(AulasEntity aula){
+
+    public AulasEntity saveAula(AulasEntity aula) {
         return aulaRepository.save(aula);
     }
-    public Optional<AulasEntity>getById(Integer id){
+
+    public Optional<AulasEntity> getById(Integer id) {
         return aulaRepository.findById(id);
     }
+<<<<<<< HEAD
+
+    public AulasEntity updateById(AulasEntity request, Integer id) {
+        AulasEntity aula = aulaRepository.findById(id).get();
+=======
     public AulasEntity updateById(AulasEntity request,Integer id){
         AulasEntity aula=aulaRepository.findById(id).get();
 >>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
+>>>>>>> c0f9bb5a87bba794458de9efb89eda964d78be69
         aula.setDescripcion(request.getDescripcion());
         aula.setNum(request.getNum());
         aula.setCodigo(request.getCodigo());
@@ -56,12 +68,21 @@ public class AulaService {
             return true;
         } catch (Exception e) {
 =======
+<<<<<<< HEAD
+
+    public Boolean deleteAula(Integer id) {
+        try {
+            aulaRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+=======
     public Boolean deleteAula(Integer id){
         try{
             aulaRepository.deleteById(id);
             return true;
         }catch (Exception e){
 >>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
+>>>>>>> c0f9bb5a87bba794458de9efb89eda964d78be69
             return false;
         }
     }
