@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "personal", schema = "tic_incidencias", catalog = "")
 public class PersonalEntity {
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)

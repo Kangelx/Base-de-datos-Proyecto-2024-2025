@@ -2,42 +2,4 @@
 <entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
                  version="3.0">
 
-    <entity class="com.api.reto.models.IncidenciasEntity">
-        <table name="incidencias" schema="tic_incidencias" catalog=""/>
-        <attributes>
-            <id name="num">
-                <column name="num" precision="-1"/>
-            </id>
-            <basic name="tipo">
-                <column name="tipo" precision="-1"/>
-            </basic>
-            <basic name="subtipoId">
-                <column name="subtipo_id" precision="-1"/>
-            </basic>
-            <basic name="fechaCreacion">
-                <column name="fecha_creacion" precision="-1"/>
-            </basic>
-            <basic name="fechaCierre">
-                <column name="fecha_cierre" nullable="false" precision="-1"/>
-            </basic>
-            <basic name="descripcion">
-                <column name="descripcion"/>
-            </basic>
-            <basic name="estado">
-                <column name="estado" precision="-1"/>
-            </basic>
-            <basic name="adjuntoUrl">
-                <column name="adjunto_url" nullable="false"/>
-            </basic>
-            <basic name="creadorId">
-                <column name="creador_id" precision="-1"/>
-            </basic>
-            <basic name="responsableId">
-                <column name="responsable_id" nullable="false" precision="-1"/>
-            </basic>
-            <basic name="equipoId">
-                <column name="equipo_id" nullable="false" precision="-1"/>
-            </basic>
-        </attributes>
-    </entity>
 </entity-mappings>

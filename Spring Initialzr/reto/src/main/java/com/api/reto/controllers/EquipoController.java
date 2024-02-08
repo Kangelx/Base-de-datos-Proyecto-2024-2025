@@ -1,8 +1,7 @@
 package com.api.reto.controllers;
 
-import com.api.reto.models.AulasEntity;
+
 import com.api.reto.models.EquiposEntity;
-import com.api.reto.services.AulaService;
 import com.api.reto.services.EquipoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

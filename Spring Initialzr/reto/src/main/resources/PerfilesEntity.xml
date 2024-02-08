@@ -22,4 +22,5 @@
             </basic>
         </attributes>
     </entity>
+    <entity class="com.api.reto.muu.AulasEntity"/>
 </entity-mappings>

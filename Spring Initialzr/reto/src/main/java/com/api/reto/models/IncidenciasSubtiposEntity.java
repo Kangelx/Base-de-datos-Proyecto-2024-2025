@@ -34,7 +34,7 @@ public class IncidenciasSubtiposEntity {
         this.id = id;
     }
 
-    public Object getTipo() {
+    public TipoEnum getTipo() {
         return tipo;
     }
 
