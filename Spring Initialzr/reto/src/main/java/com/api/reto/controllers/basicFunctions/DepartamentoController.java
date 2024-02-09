@@ -1,5 +1,6 @@
 package com.api.reto.controllers.basicFunctions;
 
+import com.api.reto.dto.DepartamentoDTO;
 import com.api.reto.models.DepartamentosEntity;
 import com.api.reto.models.PersonalEntity;
 import com.api.reto.services.basics.DepartamentoService;
@@ -22,7 +23,7 @@ public class DepartamentoController {
     private PersonalService personalService;
 
     @GetMapping
-    public ArrayList<DepartamentosEntity> getDepartamentos() {
+    public ArrayList<DepartamentoDTO> getDepartamentos() {
         return departamentoService.getDepartamentos();
     }
 

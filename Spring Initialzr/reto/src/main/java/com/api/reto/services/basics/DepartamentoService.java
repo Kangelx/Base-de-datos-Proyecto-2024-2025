@@ -1,5 +1,6 @@
 package com.api.reto.services.basics;
 
+import com.api.reto.dto.DepartamentoDTO;
 import com.api.reto.models.DepartamentosEntity;
 import com.api.reto.models.PersonalEntity;
 import com.api.reto.repositories.IDepartamentoRepository;
@@ -14,8 +15,22 @@ public class DepartamentoService {
     @Autowired
     private IDepartamentoRepository departamentoRepository;
 
-    public ArrayList<DepartamentosEntity> getDepartamentos() {
-        return (ArrayList<DepartamentosEntity>) departamentoRepository.findAll();
+    public ArrayList<DepartamentoDTO> getDepartamentos() {
+        ArrayList<DepartamentoDTO> departamentosDTO = new ArrayList<>();
+        for (DepartamentosEntity departamento : departamentoRepository.findAll()) {
+            DepartamentoDTO dto = new DepartamentoDTO();
+            dto.setId(departamento.getId());
+            dto.setCod(departamento.getCod());
+            dto.setNombre(departamento.getNombre());
+            dto.setActivo(departamento.getActivo());
+            if (departamento.getJefedepId() != null) {
+                dto.setJefeDepartamentoId(departamento.getJefedepId().getId());
+            } else {
+                dto.setJefeDepartamentoId(null); // Si el jefe del departamento es nulo, establecer el ID como nulo
+            }
+            departamentosDTO.add(dto);
+        }
+        return departamentosDTO;
     }
 
     public DepartamentosEntity saveDepartamento(DepartamentosEntity departamento) {
