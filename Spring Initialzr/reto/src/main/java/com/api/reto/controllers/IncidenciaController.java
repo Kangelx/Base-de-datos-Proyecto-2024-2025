@@ -20,7 +20,7 @@ public class IncidenciaController {
         return this.incidenciaService.getIncidencias();
     }
 
-    @PostMapping(path = "/post")
+    @PostMapping
     public IncidenciasEntity saveIncidencia(@RequestBody IncidenciasEntity incidencia) {
         return this.incidenciaService.saveIncidencia(incidencia);
     }
@@ -30,7 +30,7 @@ public class IncidenciaController {
         return this.incidenciaService.getById(id);
     }
 
-    @PutMapping("/put{id}")
+    @PutMapping("/{id}")
     public IncidenciasEntity updateIncidenciaById(@RequestBody IncidenciasEntity incidencia, @PathVariable Integer id) {
         return this.incidenciaService.updateById(incidencia, id);
     }

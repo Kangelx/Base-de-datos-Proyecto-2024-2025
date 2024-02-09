@@ -28,7 +28,7 @@ public class IncidenciaService {
     public IncidenciasEntity updateById(IncidenciasEntity request, Integer id) {
         IncidenciasEntity incidencia = incidenciasRepository.findById(id).orElse(null);
         if (incidencia != null) {
-           /* incidencia.setTipo(request.getTipo());*/
+            incidencia.setTipo(request.getTipo());
             incidencia.setSubtipoId(request.getSubtipoId());
             incidencia.setFechaCreacion(request.getFechaCreacion());
             incidencia.setFechaCierre(request.getFechaCierre());
