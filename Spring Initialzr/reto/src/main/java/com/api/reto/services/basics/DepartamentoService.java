@@ -15,10 +15,6 @@ public class DepartamentoService {
     private IDepartamentoRepository departamentoRepository;
 
     public ArrayList<DepartamentosEntity> getDepartamentos() {
-        //Convertir PersonalEntity atributo Integer
-        for (DepartamentosEntity jefe:departamentoRepository.findAll()) {
-            jefe.setJefedepartamentoIdInteger(jefe.getJefedepId().getId());
-        }
         return (ArrayList<DepartamentosEntity>) departamentoRepository.findAll();
     }
 
