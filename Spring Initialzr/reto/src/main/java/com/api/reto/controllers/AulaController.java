@@ -23,15 +23,7 @@ public class AulaController {
         return this.aulaService.getAulas();
     }
 
-<<<<<<< HEAD
     @PostMapping(path = "/post")
-=======
-<<<<<<< HEAD
-    @PostMapping(path = "/post")
-=======
-    @PostMapping
->>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
->>>>>>> c0f9bb5a87bba794458de9efb89eda964d78be69
     public AulasEntity saveAula(@RequestBody AulasEntity aula) {
         return this.aulaService.saveAula(aula);
     }
@@ -41,15 +33,7 @@ public class AulaController {
         return this.aulaService.getById(id);
     }
 
-<<<<<<< HEAD
     @PutMapping("/put{id}")
-=======
-<<<<<<< HEAD
-    @PutMapping("/put{id}")
-=======
-    @PutMapping("/{id}")
->>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
->>>>>>> c0f9bb5a87bba794458de9efb89eda964d78be69
     public AulasEntity updateAulaById(@RequestBody AulasEntity request, @PathVariable Integer id) {
         return this.aulaService.updateById(request, id);
     }
