@@ -29,20 +29,12 @@ public class IncidenciaSubtipoController {
         return this.incidenciaSubtiposService.getById(id);
     }
 
-<<<<<<< HEAD
     @PutMapping("/put/{id}")
-=======
-    @PutMapping("/put{id}")
->>>>>>> e66289f6c4129b5717f58873deb75ab03ea278d9
     public IncidenciasSubtiposEntity updateIncidenciaSubtipoById(@RequestBody IncidenciasSubtiposEntity request, @PathVariable Integer id) {
         return this.incidenciaSubtiposService.updateById(request, id);
     }
 
-<<<<<<< HEAD
     @DeleteMapping(path = "/del/{id}")
-=======
-    @DeleteMapping(path = "/del{id}")
->>>>>>> e66289f6c4129b5717f58873deb75ab03ea278d9
 
     public String deleteById(@PathVariable("id") Integer id) {
         boolean ok = this.incidenciaSubtiposService.deleteIncidenciaSubtipo(id);

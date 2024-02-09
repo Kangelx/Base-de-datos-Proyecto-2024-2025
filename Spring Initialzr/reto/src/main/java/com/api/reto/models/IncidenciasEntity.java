@@ -8,28 +8,12 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "incidencias", schema = "tic_incidencias", catalog = "")
 public class IncidenciasEntity {
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
->>>>>>> 43ff8031baadfe9ffa964009b1001fdee16163ba
->>>>>>> e66289f6c4129b5717f58873deb75ab03ea278d9
     @Id
     @Column(name = "num", nullable = false)
     private int num;
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-<<<<<<< HEAD
     private TipoEnum  tipo;
-=======
-<<<<<<< HEAD
-    private TipoEnum  tipo;
-=======
-    private String  tipo;
->>>>>>> 43ff8031baadfe9ffa964009b1001fdee16163ba
->>>>>>> e66289f6c4129b5717f58873deb75ab03ea278d9
     @ManyToOne
     @JoinColumn(name = "subtipo_id", foreignKey = @ForeignKey(name = "FK_INCIDENCIA_INCIDENCIASUBTIPO"))
     private IncidenciasSubtiposEntity subtipoId;
@@ -42,15 +26,7 @@ public class IncidenciasEntity {
     @Basic
     @Column(name = "descripcion", nullable = false, length = -1)
     private String descripcion;
-<<<<<<< HEAD
     @Enumerated(EnumType.STRING)
-=======
-<<<<<<< HEAD
-    @Enumerated(EnumType.STRING)
-=======
-
->>>>>>> 43ff8031baadfe9ffa964009b1001fdee16163ba
->>>>>>> e66289f6c4129b5717f58873deb75ab03ea278d9
     @Column(name = "estado", nullable = false)
     private EstadoEnum estado;
     @Basic
@@ -77,15 +53,7 @@ public class IncidenciasEntity {
         this.num = num;
     }
 
-<<<<<<< HEAD
     public TipoEnum getTipo() {
-=======
-<<<<<<< HEAD
-    public TipoEnum getTipo() {
-=======
-    public String getTipo() {
->>>>>>> 43ff8031baadfe9ffa964009b1001fdee16163ba
->>>>>>> e66289f6c4129b5717f58873deb75ab03ea278d9
         return tipo;
     }
 

@@ -10,10 +10,6 @@ import java.util.Optional;
 
 @Repository
 public class IncidenciaService {
-<<<<<<< HEAD
-=======
-
->>>>>>> e66289f6c4129b5717f58873deb75ab03ea278d9
     @Autowired
     IIncidenciasRepository incidenciasRepository;
 
