@@ -110,7 +110,7 @@ DROP TABLE IF EXISTS `equipos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipos` (
-  `id` int NOT NULL,
+  `id` int NOT NULL AUTO_INCREMENT,
   `tipo_equipo` enum('ALTAVOCES','IMPRESORA','MONITOR','PANTALLA_INTERACTIVA','PORTATIL_DE_AULA','PORTATIL_CONSEJERIA','PROYECTOR') COLLATE utf8_spanish_ci NOT NULL,
   `fecha_adquisicion` date DEFAULT NULL,
   `etiqueta` char(8) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE `equipos` (
   PRIMARY KEY (`id`),
   KEY `fk_equipos_aulas1_idx` (`aula_num`),
   CONSTRAINT `fk_equipos_aulas1` FOREIGN KEY (`aula_num`) REFERENCES `aulas` (`num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `equipos` (
 
 LOCK TABLES `equipos` WRITE;
 /*!40000 ALTER TABLE `equipos` DISABLE KEYS */;
-INSERT INTO `equipos` VALUES (1,'ALTAVOCES','2022-03-01','01','HP','EliteDesk 800 G5','Estación de trabajo potente para diseño gráfico',1,4,1),(2,'MONITOR','2022-03-05','02','Epson','EcoTank ET-2720','Impresora de inyección de tinta con tanque de tinta',0,2,NULL),(3,'ALTAVOCES','2022-03-10','03','Sony','VPL-VW295ES','Proyector de cine en casa con resolución 4K',0,1,NULL),(4,'IMPRESORA','2022-03-15','04','04r','Aspire TC-895','Computadora de escritorio para uso general',0,1,2),(5,'ALTAVOCES','2022-03-20','05','Canon','imageCLASS MF743Cdw','Impresora láser color con funciones multifunción',1,1,NULL),(6,'ALTAVOCES','2022-03-25','06','BenQ','TH685','Proyector para juegos y entretenimiento en casa',0,2,NULL),(7,'IMPRESORA','2022-04-10','07','Dell','Inspiron 3880','Ordenador para tareas cotidianas',0,2,1),(8,'ALTAVOCES','2022-04-15','08','Samsung','Xpress C430W','Impresora láser color compacta',0,3,NULL),(9,'ALTAVOCES','2022-04-20','09','Optoma','HD28HDR','Proyector de cine en casa con HDR',0,4,NULL),(10,'ALTAVOCES','1999-01-10','10','HP','Top Tier 9k','La joya de la corona',1,3,NULL),(11,'ALTAVOCES','2005-02-04','11','HP','K8','Altavoces antiigüos y destartalados, poseen un piloto de color verde que no funciona',0,1,NULL),(12,'ALTAVOCES','2010-06-03','12','HP','THCLASS J8','Portátil de uso cotidiano',0,2,NULL),(13,'ALTAVOCES','2022-03-01','01','HP','EliteDesk 800 G5','Estación de trabajo potente para diseño gráfico',1,4,1);
+INSERT INTO `equipos` VALUES (1,'ALTAVOCES','2022-03-01','01','HP','EliteDesk 800 G5','Estación de trabajo potente para diseño gráfico',1,4,1),(2,'MONITOR','2022-03-05','02','Epson','EcoTank ET-2720','Impresora de inyección de tinta con tanque de tinta',0,2,NULL),(3,'ALTAVOCES','2022-03-10','03','Sony','VPL-VW295ES','Proyector de cine en casa con resolución 4K',0,1,NULL),(4,'IMPRESORA','2022-03-15','04','04r','Aspire TC-895','Computadora de escritorio para uso general',0,1,2),(5,'ALTAVOCES','2022-03-20','05','Canon','imageCLASS MF743Cdw','Impresora láser color con funciones multifunción',1,1,NULL),(6,'ALTAVOCES','2022-03-25','06','BenQ','JAAA','Proyector para juegos y entretenimiento en casa',0,2,NULL),(7,'IMPRESORA','2022-04-10','07','Dell','Inspiron 3880','Ordenador para tareas cotidianas',0,2,1),(8,'ALTAVOCES','2022-04-15','08','Samsung','Xpress C430W','Impresora láser color compacta',0,3,NULL),(9,'ALTAVOCES','2022-04-20','09','Optoma','HD28HDR','Proyector de cine en casa con HDR',0,4,NULL),(10,'ALTAVOCES','1999-01-10','10','HP','Top Tier 9k','La joya de la corona',1,3,NULL),(11,'ALTAVOCES','2005-02-04','11','HP','K8','Altavoces antiigüos y destartalados, poseen un piloto de color verde que no funciona',0,1,NULL),(12,'ALTAVOCES','2022-03-25','06','BenQ','HOLA','Proyector para juegos y entretenimiento en casa',0,2,NULL);
 /*!40000 ALTER TABLE `equipos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -145,7 +145,7 @@ DROP TABLE IF EXISTS `incidencias`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `incidencias` (
   `num` int NOT NULL AUTO_INCREMENT,
-  `tipo` enum('EQUIPOS','CUENTAS','WIFI','INTERNET','SOFTWARE') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `tipo` varchar(15) COLLATE utf8_spanish_ci NOT NULL,
   `subtipo_id` int NOT NULL,
   `fecha_creacion` datetime NOT NULL,
   `fecha_cierre` datetime DEFAULT NULL,
@@ -160,8 +160,8 @@ CREATE TABLE `incidencias` (
   KEY `fk_incidencias_incidencias_subtipos1_idx` (`subtipo_id`),
   KEY `fk_incidencias_personal1_idx` (`creador_id`),
   KEY `fk_incidencias_personal2_idx` (`responsable_id`),
-  KEY `fk_incidencias_equipos1_idx` (`equipo_id`),
-  CONSTRAINT `fk_incidencias_equipos1` FOREIGN KEY (`equipo_id`) REFERENCES `equipos` (`id`),
+  KEY `fk_incidencias_equipo_idx` (`equipo_id`),
+  CONSTRAINT `fk_incidencias_equipo` FOREIGN KEY (`equipo_id`) REFERENCES `equipos` (`id`),
   CONSTRAINT `fk_incidencias_incidencias_subtipos1` FOREIGN KEY (`subtipo_id`) REFERENCES `incidencias_subtipos` (`id`),
   CONSTRAINT `fk_incidencias_personal1` FOREIGN KEY (`creador_id`) REFERENCES `personal` (`id`),
   CONSTRAINT `fk_incidencias_personal2` FOREIGN KEY (`responsable_id`) REFERENCES `personal` (`id`)
@@ -191,7 +191,7 @@ CREATE TABLE `incidencias_subtipos` (
   `subtipo_nombre` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
   `sub_subtipo` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -200,7 +200,7 @@ CREATE TABLE `incidencias_subtipos` (
 
 LOCK TABLES `incidencias_subtipos` WRITE;
 /*!40000 ALTER TABLE `incidencias_subtipos` DISABLE KEYS */;
-INSERT INTO `incidencias_subtipos` VALUES (1,'EQUIPOS','PC','ORDENADOR'),(2,'EQUIPOS','PC','RATÓN'),(3,'EQUIPOS','PC','TECLADO'),(4,'EQUIPOS','ALTAVOCES',NULL),(5,'EQUIPOS','MONITOR',NULL),(6,'EQUIPOS','PROYECTOR',NULL),(7,'EQUIPOS','PANTALLA',NULL),(8,'EQUIPOS','PORTÁTIL','PROPORCIONADO POR CONSEJERÍA'),(9,'EQUIPOS','PORTÁTIL','DE AULA'),(10,'EQUIPOS','IMPRESORA',NULL),(11,'CUENTAS','EDUCANTABRIA',NULL),(12,'CUENTAS','GOOGLE CLASSROOM',NULL),(13,'CUENTAS','DOMINIO',NULL),(14,'CUENTAS','YEDRA','GESTIONA J.EST.'),(15,'WIFI','iesmiguelherrero',NULL),(16,'WIFI','WIECAN',NULL),(17,'INTERNET','INSTALACIÓN',NULL),(18,'INTERNET','ACTUALIZACIÓN',NULL);
+INSERT INTO `incidencias_subtipos` VALUES (1,'EQUIPOS','PC','ORDENADOR'),(2,'EQUIPOS','PC','RATÓN'),(3,'EQUIPOS','PC','TECLADO'),(4,'EQUIPOS','ALTAVOCES',NULL),(5,'EQUIPOS','MONITOR',NULL),(6,'EQUIPOS','PROYECTOR',NULL),(7,'EQUIPOS','PANTALLA',NULL),(8,'EQUIPOS','PORTÁTIL','PROPORCIONADO POR CONSEJERÍA'),(9,'EQUIPOS','PORTÁTIL','DE AULA'),(10,'EQUIPOS','IMPRESORA',NULL),(11,'CUENTAS','EDUCANTABRIA',NULL),(12,'CUENTAS','GOOGLE CLASSROOM',NULL),(13,'CUENTAS','DOMINIO',NULL),(14,'CUENTAS','YEDRA','GESTIONA J.EST.'),(15,'WIFI','iesmiguelherrero',NULL),(16,'WIFI','WIECAN',NULL),(17,'INTERNET','INSTALACIÓN',NULL),(18,'INTERNET','ACTUALIZACIÓN',NULL),(19,'EQUIPOS','PC','ZAP');
 /*!40000 ALTER TABLE `incidencias_subtipos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,4 +277,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-08 17:17:44
+-- Dump completed on 2024-02-09 17:48:45

@@ -16,13 +16,13 @@ public class IncidenciasSubtiposEntity {
     @Id
     @Column(name = "id", nullable = false)
     private int id;
-    @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
     private TipoEnum tipo;
     @Basic
     @Column(name = "subtipo_nombre", nullable = false, length = 20)
     private String subtipoNombre;
-    @Basic
+
     @Column(name = "sub_subtipo", nullable = true, length = 40)
     private String subSubtipo;
 

@@ -8,14 +8,12 @@ import java.sql.Timestamp;
 @Entity
 @Table(name = "incidencias", schema = "tic_incidencias", catalog = "")
 public class IncidenciasEntity {
-
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "num", nullable = false)
     private int num;
-    @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo", nullable = false)
-    private String  tipo;
+    private TipoEnum  tipo;
     @ManyToOne
     @JoinColumn(name = "subtipo_id", foreignKey = @ForeignKey(name = "FK_INCIDENCIA_INCIDENCIASUBTIPO"))
     private IncidenciasSubtiposEntity subtipoId;
@@ -28,7 +26,7 @@ public class IncidenciasEntity {
     @Basic
     @Column(name = "descripcion", nullable = false, length = -1)
     private String descripcion;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "estado", nullable = false)
     private EstadoEnum estado;
     @Basic
@@ -55,11 +53,11 @@ public class IncidenciasEntity {
         this.num = num;
     }
 
-    public String getTipo() {
+    public TipoEnum getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoEnum tipo) {
         this.tipo = tipo;
     }
 

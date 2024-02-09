@@ -1,5 +1,6 @@
 package com.api.reto.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,8 +20,14 @@ public class DepartamentosEntity {
     @Column(name = "activo", nullable = false)
     private byte activo;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "jefedep_id",foreignKey = @ForeignKey(name="FK_PERSONAL_DEPARTAMENTO"))
     private PersonalEntity jefedepId;
+
+    //Referencia a jefedep_id para mostrarlo por pantalla y evitar la excepción StackOVerflow
+    @Basic
+    @Column(name = "jefedep_id")
+    private Integer jefedepartamentoIdInteger;
 
     public int getId() {
         return id;
@@ -60,5 +67,13 @@ public class DepartamentosEntity {
 
     public void setJefedepId(PersonalEntity jefedepId) {
         this.jefedepId = jefedepId;
+    }
+
+    public Integer getJefedepartamentoIdInteger() {
+        return jefedepartamentoIdInteger;
+    }
+
+    public void setJefedepartamentoIdInteger(Integer jefedepartamentoIdInteger) {
+        this.jefedepartamentoIdInteger = jefedepartamentoIdInteger;
     }
 }
