@@ -1,5 +1,6 @@
 package com.api.reto.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +20,7 @@ public class DepartamentosEntity {
     @Column(name = "activo", nullable = false)
     private byte activo;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "jefedep_id",foreignKey = @ForeignKey(name="FK_PERSONAL_DEPARTAMENTO"))
     private PersonalEntity jefedepId;
 

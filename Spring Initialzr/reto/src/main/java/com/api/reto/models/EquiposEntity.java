@@ -1,5 +1,6 @@
 package com.api.reto.models;
 
+import com.api.reto.enums.TipoEquipoEnum;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -7,54 +8,15 @@ import java.sql.Date;
 @Entity
 @Table(name = "equipos", schema = "tic_incidencias", catalog = "")
 public class EquiposEntity {
-<<<<<<< HEAD
-   /* public enum TipoEquipoEnum {
-=======
-<<<<<<< HEAD
-   /* public enum TipoEquipoEnum {
-=======
-    public enum TipoEquipoEnum {
->>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
->>>>>>> c0f9bb5a87bba794458de9efb89eda964d78be69
-        altavoces,
-        impresora,
-        monitor,
-        pantalla_interactiva,
-        portátil_de_aula,
-        portátil_Consejería,
-        proyector
-<<<<<<< HEAD
-    }*/
+
 
     @Id
     @Column(name = "id", nullable = false)
     private int id;
-    @Transient
-  /*  @Enumerated(EnumType.ORDINAL)
-    @Column(name = "tipo_equipo", nullable = false)*/
-    private Byte tipoEquipo;
-=======
-<<<<<<< HEAD
-    }*/
 
-    @Id
-    @Column(name = "id", nullable = false)
-    private int id;
-    @Transient
-  /*  @Enumerated(EnumType.ORDINAL)
-    @Column(name = "tipo_equipo", nullable = false)*/
-    private Byte tipoEquipo;
-=======
-    }
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    @Column(name = "id", nullable = false)
-    private int id;
-    @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "tipo_equipo", nullable = false)
     private TipoEquipoEnum tipoEquipo;
->>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
->>>>>>> c0f9bb5a87bba794458de9efb89eda964d78be69
     @Basic
     @Column(name = "fecha_adquisicion", nullable = true)
     private Date fechaAdquisicion;
@@ -71,7 +33,6 @@ public class EquiposEntity {
     @Column(name = "descripcion", nullable = true, length = -1)
     private String descripcion;
     @Basic
-
     @Column(name = "baja", nullable = true)
     private Byte baja;
     @ManyToOne
@@ -89,27 +50,11 @@ public class EquiposEntity {
         this.id = id;
     }
 
-<<<<<<< HEAD
-    public Byte getTipoEquipo() {
-        return tipoEquipo;
-    }
-
-    public void setTipoEquipo(Byte tipoEquipo) {
-=======
-<<<<<<< HEAD
-    public Byte getTipoEquipo() {
-        return tipoEquipo;
-    }
-
-    public void setTipoEquipo(Byte tipoEquipo) {
-=======
-    public Object getTipoEquipo() {
+    public TipoEquipoEnum getTipoEquipo() {
         return tipoEquipo;
     }
 
     public void setTipoEquipo(TipoEquipoEnum tipoEquipo) {
->>>>>>> ed18ab7994a95d3e9d80eb4f272c384927257e39
->>>>>>> c0f9bb5a87bba794458de9efb89eda964d78be69
         this.tipoEquipo = tipoEquipo;
     }
 

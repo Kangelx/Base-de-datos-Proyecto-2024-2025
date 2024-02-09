@@ -2,21 +2,4 @@
 <entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
                  version="3.0">
 
-    <entity class="com.api.reto.models.AulasEntity">
-        <table name="aulas" schema="tic_incidencias" catalog=""/>
-        <attributes>
-            <id name="num">
-                <column name="num" precision="-1"/>
-            </id>
-            <basic name="codigo">
-                <column name="codigo" length="8"/>
-            </basic>
-            <basic name="descripcion">
-                <column name="descripcion" length="100"/>
-            </basic>
-            <basic name="planta">
-                <column name="planta" precision="-1"/>
-            </basic>
-        </attributes>
-    </entity>
 </entity-mappings>

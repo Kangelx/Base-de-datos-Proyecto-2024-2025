@@ -37,7 +37,7 @@ CREATE TABLE `aulas` (
 
 LOCK TABLES `aulas` WRITE;
 /*!40000 ALTER TABLE `aulas` DISABLE KEYS */;
-INSERT INTO `aulas` VALUES (1,'IF01','Aula DAM2',1),(2,'IF02','Aula DAM1',2),(3,'IF03','Aula DAW1',2),(4,'IF04','Aula DAW2',1),(5,'SOLO8DIG','API Fiesta',3);
+INSERT INTO `aulas` VALUES (1,'IF01','Aula DAM2',1),(2,'IF02','Aula DAM1',2),(3,'IF03','Aula DAW1',2),(4,'IF04','Aula DAW2',1),(5,'IF02','Aula DAM1',342);
 /*!40000 ALTER TABLE `aulas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -89,7 +89,7 @@ CREATE TABLE `departamentos` (
   PRIMARY KEY (`id`),
   KEY `fk_departamentos_personal1_idx` (`jefedep_id`),
   CONSTRAINT `fk_departamentos_personal1` FOREIGN KEY (`jefedep_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -98,7 +98,7 @@ CREATE TABLE `departamentos` (
 
 LOCK TABLES `departamentos` WRITE;
 /*!40000 ALTER TABLE `departamentos` DISABLE KEYS */;
-INSERT INTO `departamentos` VALUES (1,'DEP001','Departamento de Matemáticas',1,1),(2,'DEP002','Departamento de Historia',1,2),(3,'DEP003','Departamento de Ciencias Naturales',1,3),(4,'DEP004','Departamento de Idiomas',1,4),(5,'DEP005','Departamento de Educación Física',1,5);
+INSERT INTO `departamentos` VALUES (1,'DEP001','De',1,NULL),(2,'DEP002','Departamento de Historia',1,2),(3,'DEP003','Departamento de Ciencias Naturales',1,3),(4,'DEP004','Departamento de Idiomas',1,4),(5,'DEP005','Departamento de Educación Física',1,5),(6,'DEP001','Departamento de Matemáticas',1,NULL),(8,'DEP001','De',1,NULL),(9,'DEP001','De',1,NULL),(10,'DEP001','De',1,NULL);
 /*!40000 ALTER TABLE `departamentos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -111,7 +111,7 @@ DROP TABLE IF EXISTS `equipos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipos` (
   `id` int NOT NULL,
-  `tipo_equipo` enum('altavoces','impresora','monitor','pantalla interactiva','portátil de aula','portátil Consejería','proyector') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `tipo_equipo` enum('ALTAVOCES','IMPRESORA','MONITOR','PANTALLA_INTERACTIVA','PORTATIL_DE_AULA','PORTATIL_CONSERJERIA','PROYECTOR') COLLATE utf8mb3_spanish_ci NOT NULL,
   `fecha_adquisicion` date DEFAULT NULL,
   `etiqueta` char(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `marca` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
@@ -132,7 +132,7 @@ CREATE TABLE `equipos` (
 
 LOCK TABLES `equipos` WRITE;
 /*!40000 ALTER TABLE `equipos` DISABLE KEYS */;
-INSERT INTO `equipos` VALUES (1,'monitor','2022-03-01','01','HP','EliteDesk 800 G5','Estación de trabajo potente para diseño gráfico',1,4,1),(2,'impresora','2022-03-05','02','Epson','EcoTank ET-2720','Impresora de inyección de tinta con tanque de tinta',0,2,NULL),(3,'proyector','2022-03-10','03','Sony','VPL-VW295ES','Proyector de cine en casa con resolución 4K',0,1,NULL),(4,'monitor','2022-03-15','04','04r','Aspire TC-895','Computadora de escritorio para uso general',0,1,2),(5,'impresora','2022-03-20','05','Canon','imageCLASS MF743Cdw','Impresora láser color con funciones multifunción',1,1,NULL),(6,'proyector','2022-03-25','06','BenQ','TH685','Proyector para juegos y entretenimiento en casa',0,2,NULL),(7,'monitor','2022-04-10','07','Dell','Inspiron 3880','Ordenador para tareas cotidianas',0,2,1),(8,'impresora','2022-04-15','08','Samsung','Xpress C430W','Impresora láser color compacta',0,3,NULL),(9,'proyector','2022-04-20','09','Optoma','HD28HDR','Proyector de cine en casa con HDR',0,4,NULL),(10,'monitor','1999-01-10','10','HP','Top Tier 9k','La joya de la corona',1,3,NULL),(11,'altavoces','2005-02-04','11','HP','K8','Altavoces antiigüos y destartalados, poseen un piloto de color verde que no funciona',0,1,NULL),(12,'portátil de aula','2010-06-03','12','HP','THCLASS J8','Portátil de uso cotidiano',0,2,NULL),(15,'altavoces','2022-03-01','01','HP','EliteDesk 800 G5','aaaaaaaaaaaaaaaaaaaa',1,4,NULL);
+INSERT INTO `equipos` VALUES (1,'MONITOR','2022-03-01','01','HP','EliteDesk 800 G5','Estación de trabajo potente para diseño gráfico',1,4,1),(2,'IMPRESORA','2022-03-05','02','Epson','EcoTank ET-2720','Impresora de inyección de tinta con tanque de tinta',0,2,NULL),(3,'PROYECTOR','2022-03-10','03','Sony','VPL-VW295ES','Proyector de cine en casa con resolución 4K',0,1,NULL),(4,'MONITOR','2022-03-15','04','04r','Aspire TC-895','Computadora de escritorio para uso general',0,1,2),(5,'IMPRESORA','2022-03-20','05','Canon','imageCLASS MF743Cdw','Impresora láser color con funciones multifunción',1,1,NULL),(6,'MONITOR','2022-04-10','07','Dell','Inspiron 3880','aaaaaaaaaaaaaaaaaa',0,2,1),(7,'MONITOR','2022-04-10','07','Dell','Inspiron 3880','Ordenador para tareas cotidianas',0,2,1),(8,'IMPRESORA','2022-04-15','08','Samsung','Xpress C430W','Impresora láser color compacta',0,3,NULL),(9,'PROYECTOR','2022-04-20','09','Optoma','HD28HDR','Proyector de cine en casa con HDR',0,4,NULL),(10,'MONITOR','1999-01-10','10','HP','Top Tier 9k','La joya de la corona',1,3,NULL),(11,'ALTAVOCES','2005-02-04','11','HP','K8','Altavoces antiigüos y destartalados, poseen un piloto de color verde que no funciona',0,1,NULL),(12,'ALTAVOCES','2010-06-03','12','HP','THCLASS J8','Portátil de uso cotidiano',0,2,NULL),(15,'ALTAVOCES','2022-03-01','01','HP','EliteDesk 800 G5','aaaaaaaaaaaaaaaaaaaa',1,4,NULL),(20,'MONITOR','2022-04-10','07','Dell','Inspiron 3880','aaaaaaaaaaaaaaaaaa',0,2,1);
 /*!40000 ALTER TABLE `equipos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,7 +150,7 @@ CREATE TABLE `incidencias` (
   `fecha_creacion` datetime NOT NULL,
   `fecha_cierre` datetime DEFAULT NULL,
   `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `estado` enum('abierta','asignada','en proceso','enviada a Infortec','resuelta','cerrada') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `estado` enum('abierta','asignada','en_proceso','enviada_a_Infortec','resuelta','cerrada') COLLATE utf8mb3_spanish_ci NOT NULL,
   `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
   `creador_id` int NOT NULL,
   `responsable_id` int DEFAULT NULL,
@@ -174,7 +174,7 @@ CREATE TABLE `incidencias` (
 
 LOCK TABLES `incidencias` WRITE;
 /*!40000 ALTER TABLE `incidencias` DISABLE KEYS */;
-INSERT INTO `incidencias` VALUES (1,'EQUIPOS',2,'2022-03-04 14:00:00',NULL,'Problema con la impresora','en proceso','https://ejemplo.com/adjunto3.doc',1,1,1,'baja'),(2,'CUENTAS',1,'2022-03-05 16:30:00','2022-03-06 12:15:00','Restablecimiento de contraseña','cerrada',NULL,1,1,NULL,'baja'),(3,'WIFI',3,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,2,3,NULL,'baja'),(4,'INTERNET',1,'2022-03-07 11:20:00',NULL,'Problema de conexión a Internet','abierta','https://ejemplo.com/adjunto4.jpg',1,3,NULL,'baja'),(5,'SOFTWARE',2,'2022-03-08 13:45:00','2022-03-10 14:00:00','Actualización de software requerida','cerrada',NULL,3,3,NULL,'baja'),(6,'EQUIPOS',3,'2022-03-30 08:30:00',NULL,'Problema con el proyector','abierta','https://ejemplo.com/adjunto5.pdf',3,4,7,'baja'),(7,'CUENTAS',1,'2022-03-31 10:15:00',NULL,'Solicitud de creación de cuenta','asignada',NULL,4,5,NULL,'baja'),(8,'WIFI',2,'2022-04-01 12:00:00','2022-04-02 14:45:00','Interrupción intermitente en la conexión Wi-Fi','cerrada',NULL,1,6,NULL,'baja');
+INSERT INTO `incidencias` VALUES (1,'EQUIPOS',2,'2022-03-04 14:00:00',NULL,'Problema con la impresora','cerrada','https://ejemplo.com/adjunto3.doc',1,1,1,'baja'),(2,'CUENTAS',1,'2022-03-05 16:30:00','2022-03-06 12:15:00','Restablecimiento de contraseña','cerrada',NULL,1,1,NULL,'baja'),(3,'WIFI',3,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,2,3,NULL,'baja'),(4,'INTERNET',1,'2022-03-07 11:20:00',NULL,'Problema de conexión a Internet','abierta','https://ejemplo.com/adjunto4.jpg',1,3,NULL,'baja'),(5,'SOFTWARE',2,'2022-03-08 13:45:00','2022-03-10 14:00:00','Actualización de software requerida','cerrada',NULL,3,3,NULL,'baja'),(6,'EQUIPOS',3,'2022-03-30 08:30:00',NULL,'Problema con el proyector','abierta','https://ejemplo.com/adjunto5.pdf',3,4,7,'baja'),(7,'CUENTAS',1,'2022-03-31 10:15:00',NULL,'Solicitud de creación de cuenta','asignada',NULL,4,5,NULL,'baja'),(8,'WIFI',2,'2022-04-01 12:00:00','2022-04-02 14:45:00','Interrupción intermitente en la conexión Wi-Fi','cerrada',NULL,1,6,NULL,'baja');
 /*!40000 ALTER TABLE `incidencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -277,4 +277,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-08  4:40:03
+-- Dump completed on 2024-02-09  7:04:28

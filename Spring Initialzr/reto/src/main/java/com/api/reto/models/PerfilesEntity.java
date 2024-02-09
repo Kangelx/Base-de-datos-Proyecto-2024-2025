@@ -11,11 +11,9 @@ public class PerfilesEntity {
         otros
     }
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     @Id
-    @ManyToOne
-    @JoinColumn(name = "personal_id", foreignKey = @ForeignKey(name = "FK_PERSONAL_PERFIL"))
-    private PersonalEntity personalId;
+    private int personalId;
     @Basic
     @Column(name = "dominio", nullable = true, length = 15)
     private String dominio;
@@ -29,11 +27,11 @@ public class PerfilesEntity {
     @Column(name = "perfil", nullable = false)
     private PerfilEnum perfil;
 
-    public PersonalEntity getPersonalId() {
+    public int getPersonalId() {
         return personalId;
     }
 
-    public void setPersonalId(PersonalEntity personalId) {
+    public void setPersonalId(int personalId) {
         this.personalId = personalId;
     }
 
@@ -61,7 +59,7 @@ public class PerfilesEntity {
         this.password = password;
     }
 
-    public Object getPerfil() {
+    public PerfilEnum getPerfil() {
         return perfil;
     }
 
