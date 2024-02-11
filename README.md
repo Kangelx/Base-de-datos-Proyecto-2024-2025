@@ -4,4 +4,4 @@ Aplicación dis positivo Móvil: https://github.com/Kangelx/AplicacionMovil-Proy
 
 Documentacion: https://github.com/Kangelx/Documentacion-Proyecto-2024-2025
 
-SGE: https://github.com/Kangelx/SGE-Proyecto-2024/blob/main/README.md
+Aplicación Python: https://github.com/Kangelx/SGE-Proyecto-2024/blob/main/README.md
