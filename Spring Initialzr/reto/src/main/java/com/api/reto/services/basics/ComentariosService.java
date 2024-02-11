@@ -1,5 +1,6 @@
 package com.api.reto.services.basics;
 
+import com.api.reto.dto.ComentarioDTO;
 import com.api.reto.models.AulasEntity;
 import com.api.reto.models.ComentariosEntity;
 import com.api.reto.repositories.IComentarioRepository;
@@ -46,6 +47,5 @@ public class ComentariosService {
             return false;
         }
     }
-
 
 }

@@ -1,5 +1,7 @@
 package com.api.reto.services.basics;
 
+import com.api.reto.dto.PersonalDTO;
+import com.api.reto.models.DepartamentosEntity;
 import com.api.reto.models.PersonalEntity;
 import com.api.reto.repositories.IPersonalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ public class PersonalService {
         return personalRepository.findById(id);
     }
 
-    public PersonalEntity updateById(PersonalEntity request, Integer id) {
+    public PersonalDTO updateById(PersonalEntity request, Integer id) {
         PersonalEntity personal = personalRepository.findById(id).orElse(null);
         if (personal != null) {
             personal.setDni(request.getDni());
@@ -41,7 +43,7 @@ public class PersonalService {
             personal.setDepartamentoId(request.getDepartamentoId());
             personalRepository.save(personal);
         }
-        return personal;
+        return convertToDTO(personal);
     }
 
     public boolean deletePersonal(Integer id) {
@@ -51,5 +53,49 @@ public class PersonalService {
         } catch (Exception e) {
             return false;
         }
+    }
+    public PersonalDTO convertToDTO(PersonalEntity personal) {
+        PersonalDTO dto = new PersonalDTO();
+        dto.setId(personal.getId());
+        dto.setDni(personal.getDni());
+        dto.setNombre(personal.getNombre());
+        dto.setApellido1(personal.getApellido1());
+        dto.setApellido2(personal.getApellido2());
+        dto.setDireccion(personal.getDireccion());
+        dto.setLocalidad(personal.getLocalidad());
+        dto.setCp(personal.getCp());
+        dto.setTlf(personal.getTlf());
+        dto.setActivo(personal.getActivo());
+        if (personal.getDepartamentoId() != null) {
+            dto.setDepartamentoId(personal.getDepartamentoId().getId());
+        } else {
+            dto.setDepartamentoId(null); // Si el departamento es nulo, establecer el ID como nulo
+        }
+        return dto;
+    }
+    public PersonalEntity convertToEntity(PersonalDTO personaDTO) {
+        PersonalEntity personaEntity = new PersonalEntity();
+        personaEntity.setId(personaDTO.getId());
+        personaEntity.setDni(personaDTO.getDni());
+        personaEntity.setNombre(personaDTO.getNombre());
+        personaEntity.setApellido1(personaDTO.getApellido1());
+        personaEntity.setApellido2(personaDTO.getApellido2());
+        personaEntity.setDireccion(personaDTO.getDireccion());
+        personaEntity.setLocalidad(personaDTO.getLocalidad());
+        personaEntity.setCp(personaDTO.getCp());
+        personaEntity.setTlf(personaDTO.getTlf());
+        personaEntity.setActivo(personaDTO.getActivo());
+
+        // Aquí debes obtener la entidad DepartamentosEntity correspondiente al ID proporcionado
+        // DepartamentosEntity departamento = obtenerDepartamentoPorId(personaDTO.getDepartamentoId());
+
+        // Supongamos que ya tienes la entidad DepartamentosEntity
+        DepartamentosEntity departamento = new DepartamentosEntity();
+        departamento.setId(personaDTO.getDepartamentoId()); // Aquí asumimos que el ID del departamento coincide con el ID proporcionado
+
+        // Asignamos la entidad DepartamentosEntity al atributo departamentoId
+        personaEntity.setDepartamentoId(departamento);
+
+        return personaEntity;
     }
 }

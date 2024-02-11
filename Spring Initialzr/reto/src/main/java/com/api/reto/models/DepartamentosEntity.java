@@ -63,4 +63,5 @@ public class DepartamentosEntity {
     public void setJefedepId(PersonalEntity jefedepId) {
         this.jefedepId = jefedepId;
     }
+
 }

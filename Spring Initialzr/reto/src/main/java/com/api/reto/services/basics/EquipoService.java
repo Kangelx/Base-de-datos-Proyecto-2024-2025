@@ -1,5 +1,6 @@
 package com.api.reto.services.basics;
 
+import com.api.reto.dto.EquipoDTO;
 import com.api.reto.models.EquiposEntity;
 import com.api.reto.repositories.IEquipoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ public class EquipoService {
     }
 
     public EquiposEntity saveEquipo(EquiposEntity equipo) {
+
         return equipoRepository.save(equipo);
     }
 
@@ -50,4 +52,5 @@ public class EquipoService {
             return false;
         }
     }
+
 }

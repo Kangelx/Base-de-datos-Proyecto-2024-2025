@@ -30,12 +30,12 @@ public class IncidenciaController {
         return this.incidenciaService.getById(id);
     }
 
-    @PutMapping("/put{id}")
+    @PutMapping("/put/{id}")
     public IncidenciasEntity updateIncidenciaById(@RequestBody IncidenciasEntity incidencia, @PathVariable Integer id) {
         return this.incidenciaService.updateById(incidencia, id);
     }
 
-    @DeleteMapping("/del{id}")
+    @DeleteMapping("/del/{id}")
     public String deleteIncidencia(@PathVariable("id") Integer id) {
         boolean ok = incidenciaService.deleteIncidencia(id);
         if (ok) {

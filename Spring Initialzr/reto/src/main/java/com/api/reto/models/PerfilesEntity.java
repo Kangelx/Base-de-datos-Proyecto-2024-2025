@@ -1,16 +1,11 @@
 package com.api.reto.models;
 
+import com.api.reto.enums.PerfilEnum;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "perfiles", schema = "tic_incidencias", catalog = "")
 public class PerfilesEntity {
-    public enum PerfilEnum {
-        administrador,
-        profesor,
-        otros
-    }
-
 
     @Id
     private int personalId;
@@ -23,7 +18,7 @@ public class PerfilesEntity {
     @Basic
     @Column(name = "password", nullable = true, length = 32)
     private String password;
-    @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "perfil", nullable = false)
     private PerfilEnum perfil;
 
