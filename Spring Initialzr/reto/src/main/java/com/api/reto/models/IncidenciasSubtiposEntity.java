@@ -1,17 +1,12 @@
 package com.api.reto.models;
 
+import com.api.reto.enums.TipoEnum;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "incidencias_subtipos", schema = "tic_incidencias", catalog = "")
 public class IncidenciasSubtiposEntity {
-    public enum TipoEnum {
-        EQUIPOS,
-        CUENTAS,
-        WIFI,
-        INTERNET,
-        SOFTWARE
-    }
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id", nullable = false)
@@ -26,11 +21,11 @@ public class IncidenciasSubtiposEntity {
     @Column(name = "sub_subtipo", nullable = true, length = 40)
     private String subSubtipo;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,5 +1,7 @@
 package com.api.reto.dto;
 
+import java.util.Optional;
+
 public class PersonalDTO {
     private int id;
     private String dni;

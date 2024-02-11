@@ -30,29 +30,37 @@ public class DepartamentoController {
     @PostMapping(path = "/post")
     public ResponseEntity<?> saveDepartamento(@RequestBody DepartamentoDTO departamentoDTO) {
         try {
-            // Buscar la entidad PersonalEntity correspondiente al ID proporcionado
-            Optional<PersonalEntity> optionalPersonal = personalService.getById(departamentoDTO.getJefeDepartamentoId());
-            if (optionalPersonal.isPresent()) {
-                // Si se encuentra la entidad PersonalEntity, obténla y asígnala al departamento
-                PersonalEntity jefeDepartamento = optionalPersonal.get();
-
-                // Crear una nueva instancia de DepartamentosEntity y establecer los valores desde el DTO
-                DepartamentosEntity departamentoEntity = new DepartamentosEntity();
-                departamentoEntity.setCod(departamentoDTO.getCod());
-                departamentoEntity.setNombre(departamentoDTO.getNombre());
-                departamentoEntity.setActivo(departamentoDTO.getActivo());
-                departamentoEntity.setJefedepId(jefeDepartamento);
-
-                // Guardar el departamento
-                DepartamentoDTO nuevoDepartamento = departamentoService.saveDepartamento(departamentoEntity);
-
-                return ResponseEntity.ok(nuevoDepartamento);
-            } else {
-                // Si no se encuentra la entidad PersonalEntity, devuelve una respuesta de error
-                return ResponseEntity.badRequest().body("No se encontró ningún empleado con el ID proporcionado.");
+            // Verificar si se proporcionó el ID del jefe de departamento y si es diferente de null
+            Integer jefeDepId = departamentoDTO.getJefeDepartamentoId();
+            if (jefeDepId != null) {
+                // Obtener el jefe de departamento usando su ID
+                Optional<PersonalEntity> optionalPersonal = personalService.getById(jefeDepId);
+                if (!optionalPersonal.isPresent()) {
+                    return ResponseEntity.badRequest().body("No se encontró ningún empleado con el ID proporcionado.");
+                }
             }
+
+            // Si no se proporcionó el ID del jefe de departamento o es nulo, simplemente omitir la búsqueda
+
+            // Crear una nueva entidad de departamento
+            DepartamentosEntity departamentoEntity = new DepartamentosEntity();
+            departamentoEntity.setCod(departamentoDTO.getCod());
+            departamentoEntity.setNombre(departamentoDTO.getNombre());
+            departamentoEntity.setActivo(departamentoDTO.getActivo());
+
+            if (jefeDepId != null) {
+                // Si se proporcionó un ID de jefe de departamento, asignar el jefe correspondiente
+                PersonalEntity jefeDepartamento = personalService.getById(jefeDepId).get();
+                departamentoEntity.setJefedepId(jefeDepartamento);
+            } else {
+                // Si no se proporcionó un ID de jefe de departamento o es nulo, dejar el campo jefeDepId como nulo en la entidad
+                departamentoEntity.setJefedepId(null);
+            }
+
+            // Guardar y retornar el nuevo departamento
+            DepartamentoDTO nuevoDepartamento = departamentoService.saveDepartamento(departamentoEntity);
+            return ResponseEntity.ok(nuevoDepartamento);
         } catch (IllegalArgumentException e) {
-            // Manejar otras excepciones, si es necesario
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -69,45 +77,36 @@ public class DepartamentoController {
 
     @PutMapping("/put")
     public ResponseEntity<?> updateDepartamentoById(@RequestBody DepartamentoDTO request) {
+        DepartamentosEntity depEnt = new DepartamentosEntity();
         try {
-            // Obtener el departamento a actualizar usando su ID
-            Optional<DepartamentoDTO> optionalDepartamento = Optional.ofNullable(departamentoService.getById(request.getId()));
+            // Verificar si se proporcionó el ID del departamento y si existe
+            Integer departamentoId = request.getId();
+            Optional<PersonalEntity> optionalPersona = personalService.getById(departamentoId);
+            depEnt.setNombre(request.getNombre());
+            depEnt.setActivo(request.getActivo());
+            depEnt.setCod(request.getCod());
+            depEnt.setId(request.getId());
+            if (optionalPersona.isPresent()) {
+                PersonalEntity personalEntity = optionalPersona.get();
+                depEnt.setJefedepId(personalEntity);
+            }
 
-            if (optionalDepartamento.isPresent()) {
-                DepartamentoDTO departamentoDTO = optionalDepartamento.get();
 
-                // Obtener la entidad PersonalEntity correspondiente al ID del jefe del departamento
-                Optional<PersonalEntity> optionalPersonal = personalService.getById(request.getJefeDepartamentoId());
-
-                if (optionalPersonal.isPresent()) {
-                    PersonalEntity jefeDepartamento = optionalPersonal.get();
-
-                    // Actualizar los campos del departamento
-                    departamentoDTO.setCod(request.getCod());
-                    departamentoDTO.setNombre(request.getNombre());
-                    departamentoDTO.setActivo(request.getActivo());
-                    departamentoDTO.setJefeDepartamentoId(request.getJefeDepartamentoId());
-
-                    // Convertir DepartamentoDTO a DepartamentosEntity
-                    DepartamentosEntity departamentoEntity = convertToEntity(departamentoDTO);
-
-                    // Guardar el departamento actualizado en la base de datos
-                    departamentoService.saveDepartamento(departamentoEntity);
-
-                    return ResponseEntity.ok(departamentoEntity); // Retorna la entidad actualizada
-                } else {
-                    // Manejar el caso en que el jefe del departamento no se encuentra
-                    throw new IllegalArgumentException("No se encontró ningún empleado con el ID proporcionado.");
-                }
+            if (request.getJefeDepartamentoId() == null) {
+                depEnt.setJefedepId(null);
+            }
+            if (departamentoService.getById(request.getId()) != null) {
+                departamentoService.saveDepartamento(depEnt);
+                return ResponseEntity.ok(depEnt); // Retorna la entidad actualizada
             } else {
-                // Manejar el caso en que el departamento no se encuentra
                 throw new IllegalArgumentException("No se encontró ningún departamento con el ID proporcionado.");
             }
-        } catch (IllegalArgumentException e) {
-            // Manejar excepciones
+        } catch (
+                IllegalArgumentException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+
     }
 
     @DeleteMapping(path = "/del/{id}")
@@ -119,7 +118,7 @@ public class DepartamentoController {
             return ResponseEntity.notFound().build();
         }
     }
-    // Método para convertir un DepartamentoDTO en una entidad DepartamentosEntity
+
     private DepartamentosEntity convertToEntity(DepartamentoDTO departamentoDTO) {
         DepartamentosEntity departamentoEntity = new DepartamentosEntity();
         departamentoEntity.setId(departamentoDTO.getId());
@@ -127,14 +126,13 @@ public class DepartamentoController {
         departamentoEntity.setNombre(departamentoDTO.getNombre());
         departamentoEntity.setActivo(departamentoDTO.getActivo());
 
-        // Obtener el jefe del departamento usando el ID proporcionado en el DTO
+
         Optional<PersonalEntity> optionalPersonal = personalService.getById(departamentoDTO.getJefeDepartamentoId());
         if (optionalPersonal.isPresent()) {
-            // Si se encuentra el jefe del departamento, asignarlo a departamentoEntity
+
             departamentoEntity.setJefedepId(optionalPersonal.get());
         } else {
-            // Manejar el caso en que el jefe del departamento no se encuentra
-            // Lanzar una excepción indicando que no se encontró ningún empleado con el ID proporcionado
+
             throw new IllegalArgumentException("No se encontró ningún empleado con el ID proporcionado.");
         }
 

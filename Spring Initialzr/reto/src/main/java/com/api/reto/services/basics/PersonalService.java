@@ -86,15 +86,14 @@ public class PersonalService {
         personaEntity.setTlf(personaDTO.getTlf());
         personaEntity.setActivo(personaDTO.getActivo());
 
-        // Aquí debes obtener la entidad DepartamentosEntity correspondiente al ID proporcionado
-        // DepartamentosEntity departamento = obtenerDepartamentoPorId(personaDTO.getDepartamentoId());
+        // Verificar si el departamentoId no es nulo antes de asignarlo
+        if (personaDTO.getDepartamentoId() != null) {
 
-        // Supongamos que ya tienes la entidad DepartamentosEntity
-        DepartamentosEntity departamento = new DepartamentosEntity();
-        departamento.setId(personaDTO.getDepartamentoId()); // Aquí asumimos que el ID del departamento coincide con el ID proporcionado
+            DepartamentosEntity departamento = new DepartamentosEntity();
+            departamento.setId(personaDTO.getDepartamentoId());
 
-        // Asignamos la entidad DepartamentosEntity al atributo departamentoId
-        personaEntity.setDepartamentoId(departamento);
+            personaEntity.setDepartamentoId(departamento);
+        }
 
         return personaEntity;
     }
