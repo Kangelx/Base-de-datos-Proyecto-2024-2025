@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 @Table(name = "incidencias", schema = "tic_incidencias", catalog = "")
 public class IncidenciasEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "num", nullable = false)
     private int num;
     @Enumerated(EnumType.STRING)

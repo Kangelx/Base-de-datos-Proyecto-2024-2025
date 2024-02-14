@@ -75,35 +75,38 @@ public class DepartamentoController {
     @PutMapping("")
     public ResponseEntity<?> updateDepartamentoById(@RequestBody DepartamentoDTO request) {
         DepartamentosEntity depEnt = new DepartamentosEntity();
+
         try {
-            // Verificar si se proporcionó el ID del departamento y si existe
-            Integer departamentoId = request.getId();
-            Optional<PersonalEntity> optionalPersona = personalService.getById(departamentoId);
+            Integer departamentoId = request.getJefeDepartamentoId();
             depEnt.setNombre(request.getNombre());
             depEnt.setActivo(request.getActivo());
             depEnt.setCod(request.getCod());
             depEnt.setId(request.getId());
-            if (optionalPersona.isPresent()) {
-                PersonalEntity personalEntity = optionalPersona.get();
-                depEnt.setJefedepId(personalEntity);
-            }
 
-
-            if (request.getJefeDepartamentoId() == null) {
+            if (departamentoId != null) {
+                // Llama a personalService.getById solo si departamentoId no es null
+                Optional<PersonalEntity> optionalPersona = personalService.getById(departamentoId);
+                if (optionalPersona.isPresent()) {
+                    PersonalEntity personalEntity = optionalPersona.get();
+                    depEnt.setJefedepId(personalEntity);
+                } else {
+                    throw new IllegalArgumentException("No se encontró ningún empleado con el ID proporcionado.");
+                }
+            } else {
                 depEnt.setJefedepId(null);
             }
+
+            // Verifica si el departamento existe antes de llamar a saveDepartamento
             if (departamentoService.getById(request.getId()) != null) {
                 departamentoService.saveDepartamento(depEnt);
                 return ResponseEntity.ok(depEnt); // Retorna la entidad actualizada
             } else {
                 throw new IllegalArgumentException("No se encontró ningún departamento con el ID proporcionado.");
             }
-        } catch (
-                IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-
     }
 
     @DeleteMapping(path = "/{id}")

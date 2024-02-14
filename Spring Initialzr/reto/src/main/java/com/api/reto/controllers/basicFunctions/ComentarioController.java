@@ -33,12 +33,12 @@ public class ComentarioController {
 
     @PostMapping("")
     public ComentariosEntity saveComentario(@RequestBody ComentarioDTO comentarioDTO) {
-        // Obtener la persona que comenta
+
         Optional<PersonalEntity> optionalPersonaQueComenta = personalService.getById(comentarioDTO.getPersonalId());
         if (optionalPersonaQueComenta.isPresent()) {
             PersonalEntity personaQueComenta = optionalPersonaQueComenta.get();
 
-            // Obtener la incidencia comentada
+
             Optional<IncidenciasEntity> optionalIncidenciaComentada = incidenciaService.getById(comentarioDTO.getIncidenciaNum());
             if (optionalIncidenciaComentada.isPresent()) {
                 IncidenciasEntity incidenciaComentada = optionalIncidenciaComentada.get();
@@ -51,14 +51,14 @@ public class ComentarioController {
                 comentario.setIncidenciaNum(incidenciaComentada);
                 comentario.setPersonalId(personaQueComenta);
 
-                // Guardar y retornar el comentario
+
                 return comentarioService.saveComentario(comentario);
             } else {
-                // Manejar el caso en que la incidencia comentada no existe
+
                 throw new IllegalArgumentException("La incidencia comentada no existe.");
             }
         } else {
-            // Manejar el caso en que la persona que comenta no existe
+
             throw new IllegalArgumentException("La persona que comenta no existe.");
         }
     }
@@ -71,18 +71,18 @@ public class ComentarioController {
     @PutMapping("")
     public ResponseEntity<?> updateComentarioById(@RequestBody ComentarioDTO request) {
         try {
-            // Obtener el ID del comentario del DTO
+
             Integer id = request.getId();
 
-            // Verificar si el ID es válido
+
             if (id != null) {
-                // Obtener el comentario a actualizar usando su ID
+
                 Optional<ComentariosEntity> optionalComentario = comentarioService.getById(id);
 
                 if (optionalComentario.isPresent()) {
                     ComentariosEntity comentario = optionalComentario.get();
 
-                    // Convertir el DTO de comentario a entidad de comentario
+
                     Optional<PersonalEntity> personaQueComenta = personalService.getById(request.getPersonalId());
                     Optional<IncidenciasEntity> incidenciaComentada = incidenciaService.getById(request.getIncidenciaNum());
 
@@ -90,31 +90,31 @@ public class ComentarioController {
                         PersonalEntity persona = personaQueComenta.get();
                         IncidenciasEntity incidencia = incidenciaComentada.get();
 
-                        // Actualizar los campos del comentario
+
                         comentario.setTexto(request.getTexto());
                         comentario.setFechahora(request.getFechahora());
                         comentario.setAdjuntoUrl(request.getAdjuntoUrl());
                         comentario.setPersonalId(persona);
                         comentario.setIncidenciaNum(incidencia);
 
-                        // Guardar el comentario actualizado en la base de datos
+
                         comentarioService.saveComentario(comentario);
 
-                        return ResponseEntity.ok(comentario); // Retorna el comentario actualizado
+                        return ResponseEntity.ok(comentario);
                     } else {
-                        // Manejar el caso en que la persona o la incidencia no existen
+
                         throw new IllegalArgumentException("La persona o la incidencia especificadas no existen.");
                     }
                 } else {
-                    // Manejar el caso en que el comentario no se encuentra
+
                     return ResponseEntity.notFound().build();
                 }
             } else {
-                // Manejar el caso en que el ID es nulo
+
                 throw new IllegalArgumentException("El ID del comentario no puede ser nulo.");
             }
         } catch (IllegalArgumentException e) {
-            // Manejar excepciones
+
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }

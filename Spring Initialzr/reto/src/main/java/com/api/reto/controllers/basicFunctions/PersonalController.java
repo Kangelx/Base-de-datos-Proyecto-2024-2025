@@ -58,30 +58,25 @@ public class PersonalController {
     @PutMapping("")
     public ResponseEntity<?> updatePersonalById(@RequestBody PersonalDTO request) {
         try {
-
             Optional<PersonalEntity> optionalPersonal = personalService.getById(request.getId());
 
-            if (optionalPersonal.isPresent()) {
-                PersonalEntity personal = optionalPersonal.get();
+            if (!optionalPersonal.isPresent()) {
+                throw new IllegalArgumentException("No se encontró ningún personal con el ID proporcionado.");
+            }
 
+            PersonalEntity personal = optionalPersonal.get();
+            Integer departamentoId = request.getDepartamentoId();
 
-                Integer departamentoId = request.getDepartamentoId();
-                if (departamentoId != null) {
-                    // Obtener la entidad DepartamentosEntity correspondiente al ID del departamento
-                    Optional<DepartamentosEntity> optionalDepartamento = departamentoService.getByIdDTO(departamentoId);
-
-                    if (!optionalDepartamento.isPresent()) {
-                        throw new IllegalArgumentException("No se encontró ningún departamento con el ID proporcionado.");
-                    }
-
-                    DepartamentosEntity departamento = optionalDepartamento.get();
-                    // Asignar el departamento al personal
-                    personal.setDepartamentoId(departamento);
-                } else {
-                    // Si no se proporcionó el ID del departamento, mantener el departamento del personal como estaba
+            if (departamentoId != null) {
+                // Intenta obtener la entidad Departamento correspondiente al ID del departamento
+                Optional<DepartamentosEntity> optionalDepartamento = departamentoService.getByIdDTO(departamentoId);
+                if (!optionalDepartamento.isPresent()) {
+                    throw new IllegalArgumentException("No se encontró ningún departamento con el ID proporcionado.");
                 }
-
-                // Actualizar los campos del personal
+                // Asignar el departamento al personal solo si se encuentra
+                personal.setDepartamentoId(optionalDepartamento.get());
+            }
+          else{
                 personal.setDni(request.getDni());
                 personal.setNombre(request.getNombre());
                 personal.setApellido1(request.getApellido1());
@@ -91,15 +86,16 @@ public class PersonalController {
                 personal.setCp(request.getCp());
                 personal.setTlf(request.getTlf());
                 personal.setActivo(request.getActivo());
-
-                personalService.savePersonal(personal);
-
-                return ResponseEntity.ok(personal); // Retorna la entidad actualizada
-            } else {
-                throw new IllegalArgumentException("No se encontró ningún personal con el ID proporcionado.");
+                personal.setDepartamentoId(null);
             }
+
+
+            // Guardar la entidad personal actualizada
+            personalService.savePersonal(personal);
+
+            return ResponseEntity.ok(personal); // Retorna la entidad actualizada
         } catch (IllegalArgumentException e) {
-            // Manejar excepciones
+            // Manejo de excepciones
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
