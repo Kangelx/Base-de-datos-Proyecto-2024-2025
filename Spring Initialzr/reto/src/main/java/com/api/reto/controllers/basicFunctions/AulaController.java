@@ -24,7 +24,7 @@ public class AulaController {
         return ResponseEntity.ok(aulas);
     }
 
-    @PostMapping(path = "/post")
+    @PostMapping(path = "")
     public ResponseEntity<AulasEntity> saveAula(@RequestBody AulasEntity aula) {
         Optional<AulasEntity> existingAulaOptional = this.aulaService.getById(aula.getNum());
         if (existingAulaOptional.isPresent()) {
@@ -48,7 +48,7 @@ public class AulaController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PutMapping("/put")
+    @PutMapping("")
     public ResponseEntity<AulasEntity> updateAulaById(@RequestBody AulasEntity request) {
         Integer id = request.getNum();
         if (id == null) {
@@ -71,7 +71,7 @@ public class AulaController {
         }
     }
 
-    @DeleteMapping(path = "/del/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Integer id) {
         boolean ok = this.aulaService.deleteAula(id);
         if (ok) {

@@ -31,7 +31,7 @@ public class ComentarioController {
         return this.comentarioService.getComentarios();
     }
 
-    @PostMapping("/post")
+    @PostMapping("")
     public ComentariosEntity saveComentario(@RequestBody ComentarioDTO comentarioDTO) {
         // Obtener la persona que comenta
         Optional<PersonalEntity> optionalPersonaQueComenta = personalService.getById(comentarioDTO.getPersonalId());
@@ -68,7 +68,7 @@ public class ComentarioController {
         return this.comentarioService.getById(id);
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     public ResponseEntity<?> updateComentarioById(@RequestBody ComentarioDTO request) {
         try {
             // Obtener el ID del comentario del DTO
@@ -120,7 +120,7 @@ public class ComentarioController {
         }
     }
 
-    @DeleteMapping("/del/{id}")
+    @DeleteMapping("/{id}")
     public String deleteComentarioById(@PathVariable("id") Integer id) {
         boolean ok = this.comentarioService.deleteComentario(id);
         if (ok) {

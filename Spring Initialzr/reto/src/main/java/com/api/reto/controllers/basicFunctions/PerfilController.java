@@ -22,7 +22,7 @@ public class PerfilController {
         return perfilService.getPerfiles();
     }
 
-    @PostMapping(path = "/post")
+    @PostMapping(path = "")
     public ResponseEntity<?> savePerfil(@RequestBody PerfilesEntity perfil) {
         try {
             // Verificar si el ID del perfil ya existe en la base de datos
@@ -46,7 +46,7 @@ public class PerfilController {
         return perfilService.getById(id);
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     public ResponseEntity<?> updatePerfilById(@RequestBody PerfilesEntity request) {
         try {
             // Obtener el ID del perfil del cuerpo de la solicitud
@@ -68,7 +68,7 @@ public class PerfilController {
         }
     }
 
-    @DeleteMapping("/del/{id}")
+    @DeleteMapping("/{id}")
     public String deletePerfilById(@PathVariable("id") Integer id) {
         boolean deleted = perfilService.deletePerfil(id);
         if (deleted) {

@@ -29,7 +29,7 @@ public class EquipoController {
         return this.equipoService.getEquipos();
     }
 
-    @PostMapping("/post")
+    @PostMapping("")
     public EquiposEntity saveEquipo(@RequestBody EquipoDTO equipoDTO) {
         int equipoId = equipoDTO.getId();
 
@@ -63,7 +63,7 @@ public class EquipoController {
         return this.equipoService.getById(id);
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     public EquiposEntity updateEquipoById(@RequestBody EquipoDTO equipoDTO) {
         try {
             int id = equipoDTO.getId(); // Obtener el ID del DTO
@@ -104,7 +104,7 @@ public class EquipoController {
     }
 
 
-    @DeleteMapping(path = "/del/{id}")
+    @DeleteMapping(path = "/{id}")
 
     public String deleteById(@PathVariable("id") Integer id) {
         boolean ok = this.equipoService.deleteEquipo(id);

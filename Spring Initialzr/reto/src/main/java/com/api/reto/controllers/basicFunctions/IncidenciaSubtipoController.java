@@ -21,7 +21,7 @@ public class IncidenciaSubtipoController {
         return this.incidenciaSubtiposService.getIncidenciasSubtipos();
     }
 
-    @PostMapping("/post")
+    @PostMapping("")
     public ResponseEntity<?> saveIncidenciaSubtipo(@RequestBody IncidenciasSubtiposEntity incidenciaSubtipo) {
         try {
 
@@ -47,7 +47,7 @@ public class IncidenciaSubtipoController {
         return this.incidenciaSubtiposService.getById(id);
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     public ResponseEntity<?> updateIncidenciaSubtipoById(@RequestBody IncidenciasSubtiposEntity request) {
         try {
             int id = request.getId();
@@ -65,7 +65,7 @@ public class IncidenciaSubtipoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el subtipo de incidencia: " + e.getMessage());
         }
     }
-    @DeleteMapping(path = "/del/{id}")
+    @DeleteMapping(path = "/{id}")
 
     public String deleteById(@PathVariable("id") Integer id) {
         boolean ok = this.incidenciaSubtiposService.deleteIncidenciaSubtipo(id);

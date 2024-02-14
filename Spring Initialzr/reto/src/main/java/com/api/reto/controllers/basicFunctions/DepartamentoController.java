@@ -27,7 +27,7 @@ public class DepartamentoController {
         return departamentoService.getDepartamentos();
     }
 
-    @PostMapping(path = "/post")
+    @PostMapping(path = "")
     public ResponseEntity<?> saveDepartamento(@RequestBody DepartamentoDTO departamentoDTO) {
         try {
             // Verificar si se proporcionó el ID del jefe de departamento y si es diferente de null
@@ -40,9 +40,6 @@ public class DepartamentoController {
                 }
             }
 
-            // Si no se proporcionó el ID del jefe de departamento o es nulo, simplemente omitir la búsqueda
-
-            // Crear una nueva entidad de departamento
             DepartamentosEntity departamentoEntity = new DepartamentosEntity();
             departamentoEntity.setCod(departamentoDTO.getCod());
             departamentoEntity.setNombre(departamentoDTO.getNombre());
@@ -75,7 +72,7 @@ public class DepartamentoController {
         }
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     public ResponseEntity<?> updateDepartamentoById(@RequestBody DepartamentoDTO request) {
         DepartamentosEntity depEnt = new DepartamentosEntity();
         try {
@@ -109,7 +106,7 @@ public class DepartamentoController {
 
     }
 
-    @DeleteMapping(path = "/del/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<String> deleteDepartamentoById(@PathVariable("id") Integer id) {
         boolean ok = departamentoService.deleteDepartamento(id);
         if (ok) {

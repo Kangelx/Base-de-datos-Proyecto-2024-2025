@@ -28,7 +28,7 @@ public class PersonalController {
     }
 
 
-    @PostMapping("/post")
+    @PostMapping("")
     public ResponseEntity<?> savePersona(@RequestBody PersonalDTO personaDTO) {
         try {
             // Verificar si el ID de la persona ya existe
@@ -55,7 +55,7 @@ public class PersonalController {
         return this.personalService.getById(id);
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     public ResponseEntity<?> updatePersonalById(@RequestBody PersonalDTO request) {
         try {
 
@@ -104,7 +104,7 @@ public class PersonalController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-    @DeleteMapping("/del/{id}")
+    @DeleteMapping("/{id}")
     public String deletePersonalById(@PathVariable Integer id) {
         boolean deleted = personalService.deletePersonal(id);
         if (deleted) {

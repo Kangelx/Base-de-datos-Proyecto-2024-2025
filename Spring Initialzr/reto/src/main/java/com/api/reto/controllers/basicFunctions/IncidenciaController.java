@@ -39,7 +39,7 @@ public class IncidenciaController {
         return this.incidenciaService.getIncidencias();
     }
 
-    @PostMapping("/post")
+    @PostMapping("")
     public ResponseEntity<?> createIncidencia(@RequestBody IncidenciaDTO incidenciaDTO) {
         try {
             // Convertir DTO a entidad y guardar la incidencia
@@ -57,7 +57,7 @@ public class IncidenciaController {
         return this.incidenciaService.getById(id);
     }
 
-    @PutMapping("/put")
+    @PutMapping("")
     public ResponseEntity<?> updateIncidencia(@RequestBody IncidenciaDTO incidenciaDTO) {
         try {
             int id = incidenciaDTO.getNum(); // Obtener el ID del DTO
@@ -75,7 +75,7 @@ public class IncidenciaController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar la incidencia: " + e.getMessage());
         }
     }
-    @DeleteMapping("/del/{id}")
+    @DeleteMapping("/{id}")
     public String deleteIncidencia(@PathVariable("id") Integer id) {
         boolean ok = incidenciaService.deleteIncidencia(id);
         if (ok) {
