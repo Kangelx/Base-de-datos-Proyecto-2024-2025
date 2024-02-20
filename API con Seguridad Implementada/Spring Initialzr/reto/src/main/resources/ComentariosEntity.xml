@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 version="3.0">
+
+    <entity class="com.api.reto.models.ComentariosEntity">
+        <table name="comentarios" schema="tic_incidencias" catalog=""/>
+        <attributes>
+            <id name="id">
+                <column name="id" precision="-1"/>
+            </id>
+            <basic name="texto">
+                <column name="texto"/>
+            </basic>
+            <basic name="fechahora">
+                <column name="fechahora" precision="-1"/>
+            </basic>
+            <basic name="incidenciaNum">
+                <column name="incidencia_num" precision="-1"/>
+            </basic>
+            <basic name="personalId">
+                <column name="personal_id" precision="-1"/>
+            </basic>
+            <basic name="adjuntoUrl">
+                <column name="adjunto_url" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>
