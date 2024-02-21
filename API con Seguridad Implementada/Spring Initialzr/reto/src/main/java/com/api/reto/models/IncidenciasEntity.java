@@ -3,6 +3,8 @@ import com.api.reto.enums.EstadoEnum;
 import com.api.reto.enums.PrioridadEnum;
 import com.api.reto.enums.TipoEnum;
 import jakarta.persistence.*;
+
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalTime;
 
@@ -36,7 +38,7 @@ public class IncidenciasEntity {
     private String adjuntoUrl;
     @Basic
     @Column(name = "tiempo",nullable = true)
-    private Timestamp tiempo;
+    private Time tiempo;
     @ManyToOne
     @JoinColumn(name = "creador_id", foreignKey = @ForeignKey(name = "FK_PERSONALCREADOR_INCIDENCIA"))
     private PersonalEntity creadorId;
@@ -146,11 +148,11 @@ public class IncidenciasEntity {
         this.prioridad = prioridad;
     }
 
-    public Timestamp getTiempo() {
+    public Time getTiempo() {
         return tiempo;
     }
 
-    public void setTiempo(Timestamp tiempo) {
+    public void setTiempo(Time tiempo) {
         this.tiempo = tiempo;
     }
 }

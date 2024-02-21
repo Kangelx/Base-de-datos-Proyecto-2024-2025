@@ -59,7 +59,7 @@ public class EquiposExcelService {
         }
 
         // Guardar el libro de Excel
-        try (FileOutputStream fileOut = new FileOutputStream("equipos.xlsx")) {
+        try (FileOutputStream fileOut = new FileOutputStream("Informes/equipos.xlsx")) {
             workbook.write(fileOut);
         }
 

@@ -4,6 +4,7 @@ import com.api.reto.enums.EstadoEnum;
 import com.api.reto.enums.PrioridadEnum;
 import com.api.reto.enums.TipoEnum;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class IncidenciaDTO {
@@ -19,6 +20,7 @@ public class IncidenciaDTO {
     private Integer responsableId;
     private Integer equipoId;
     private PrioridadEnum prioridad;
+    private Time tiempo;
 
     // Getters y setters
     public int getNum() {
@@ -115,5 +117,13 @@ public class IncidenciaDTO {
 
     public void setPrioridad(PrioridadEnum prioridad) {
         this.prioridad = prioridad;
+    }
+
+    public Time getTiempo() {
+        return tiempo;
+    }
+
+    public void setTiempo(Time tiempo) {
+        this.tiempo = tiempo;
     }
 }

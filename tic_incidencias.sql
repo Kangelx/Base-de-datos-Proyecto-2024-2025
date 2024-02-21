@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tic_incidencias
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.31
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `aulas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aulas` (
   `num` int NOT NULL,
-  `codigo` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `descripcion` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `codigo` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `descripcion` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `planta` int NOT NULL,
   PRIMARY KEY (`num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,17 +50,17 @@ DROP TABLE IF EXISTS `comentarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comentarios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `texto` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `texto` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `fechahora` datetime NOT NULL,
   `incidencia_num` int NOT NULL,
   `personal_id` int NOT NULL,
-  `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci,
+  `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
   PRIMARY KEY (`id`),
   KEY `fk_comentarios_incidencias1_idx` (`incidencia_num`),
   KEY `fk_comentarios_personal1_idx` (`personal_id`),
   CONSTRAINT `fk_comentarios_incidencias1` FOREIGN KEY (`incidencia_num`) REFERENCES `incidencias` (`num`),
   CONSTRAINT `fk_comentarios_personal1` FOREIGN KEY (`personal_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,14 +82,14 @@ DROP TABLE IF EXISTS `departamentos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `departamentos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `cod` char(6) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `nombre` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `cod` char(6) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `nombre` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `activo` tinyint NOT NULL DEFAULT '1',
   `jefedep_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_departamentos_personal1_idx` (`jefedep_id`),
   CONSTRAINT `fk_departamentos_personal1` FOREIGN KEY (`jefedep_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,19 +111,19 @@ DROP TABLE IF EXISTS `equipos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tipo_equipo` enum('ALTAVOCES','IMPRESORA','MONITOR','PANTALLA_INTERACTIVA','PORTATIL_DE_AULA','PORTATIL_CONSEJERIA','PROYECTOR') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `tipo_equipo` enum('ALTAVOCES','IMPRESORA','MONITOR','PANTALLA_INTERACTIVA','PORTATIL_DE_AULA','PORTATIL_CONSEJERIA','PROYECTOR') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
   `fecha_adquisicion` date DEFAULT NULL,
-  `etiqueta` char(8) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `marca` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `modelo` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci,
+  `etiqueta` char(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `marca` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `modelo` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
   `baja` tinyint DEFAULT '0',
   `aula_num` int NOT NULL,
   `puesto` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_equipos_aulas1_idx` (`aula_num`),
   CONSTRAINT `fk_equipos_aulas1` FOREIGN KEY (`aula_num`) REFERENCES `aulas` (`num`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,18 +145,18 @@ DROP TABLE IF EXISTS `incidencias`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `incidencias` (
   `num` int NOT NULL AUTO_INCREMENT,
-  `tipo` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `tipo` enum('EQUIPOS','CUENTAS','WIFI','INTERNET','SOFTWARE') COLLATE utf8mb3_spanish_ci NOT NULL,
   `subtipo_id` int NOT NULL,
   `fecha_creacion` datetime NOT NULL,
   `fecha_cierre` datetime DEFAULT NULL,
-  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `estado` enum('abierta','asignada','en_proceso','enviada_a_Infortec','resuelta','cerrada') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci,
+  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `estado` enum('abierta','asignada','en_proceso','enviada_a_Infortec','resuelta','cerrada') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
   `creador_id` int NOT NULL,
   `responsable_id` int DEFAULT NULL,
   `equipo_id` int DEFAULT NULL,
-  `prioridad` enum('baja','media','alta','critica') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `tiempo` datetime DEFAULT NULL,
+  `prioridad` enum('baja','media','alta','critica') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `tiempo` time DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `fk_incidencias_incidencias_subtipos1_idx` (`subtipo_id`),
   KEY `fk_incidencias_personal1_idx` (`creador_id`),
@@ -166,7 +166,7 @@ CREATE TABLE `incidencias` (
   CONSTRAINT `fk_incidencias_incidencias_subtipos1` FOREIGN KEY (`subtipo_id`) REFERENCES `incidencias_subtipos` (`id`),
   CONSTRAINT `fk_incidencias_personal1` FOREIGN KEY (`creador_id`) REFERENCES `personal` (`id`),
   CONSTRAINT `fk_incidencias_personal2` FOREIGN KEY (`responsable_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,7 +175,7 @@ CREATE TABLE `incidencias` (
 
 LOCK TABLES `incidencias` WRITE;
 /*!40000 ALTER TABLE `incidencias` DISABLE KEYS */;
-INSERT INTO `incidencias` VALUES (1,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta','archivosAdjuntos/foto1.jpg',1,1,1,'alta',NULL),(2,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,2,2,'alta',NULL),(3,'WIFI',3,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,2,3,NULL,'media',NULL),(4,'INTERNET',1,'2022-03-07 11:20:00',NULL,'Problema de conexión a Internet','abierta','https://ejemplo.com/adjunto4.jpg',1,3,NULL,'critica',NULL),(5,'SOFTWARE',2,'2022-03-08 13:45:00','2022-03-10 14:00:00','Actualización de software requerida','cerrada',NULL,3,3,NULL,'baja',NULL),(6,'EQUIPOS',3,'2022-03-30 08:30:00',NULL,'Problema con el proyector','abierta','https://ejemplo.com/adjunto5.pdf',3,4,7,'alta',NULL),(7,'CUENTAS',1,'2022-03-31 10:15:00',NULL,'Solicitud de creación de cuenta','asignada',NULL,4,5,NULL,'media',NULL),(8,'WIFI',2,'2022-04-01 12:00:00','2022-04-02 14:45:00','Interrupción intermitente en la conexión Wi-Fi','cerrada',NULL,1,6,NULL,'baja',NULL),(33,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(34,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(35,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(36,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(37,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(38,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(39,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(40,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(41,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(42,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(43,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(44,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(45,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(46,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(47,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(48,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'baja',NULL),(49,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(50,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(51,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(52,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(53,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(54,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(55,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(56,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL),(57,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL),(58,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(59,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(60,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(61,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(62,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(63,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(64,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL),(65,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL),(66,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,10,'baja',NULL),(67,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,10,10,'baja',NULL),(68,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL);
+INSERT INTO `incidencias` VALUES (1,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta','archivosAdjuntos/foto1.jpg',1,1,1,'alta','00:10:24'),(2,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,2,2,'alta','01:20:15'),(3,'WIFI',3,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,2,3,NULL,'media','10:10:10'),(4,'INTERNET',1,'2022-03-07 11:20:00',NULL,'Problema de conexión a Internet','abierta','https://ejemplo.com/adjunto4.jpg',1,3,NULL,'critica','07:08:10'),(5,'SOFTWARE',2,'2022-03-08 13:45:00','2022-03-10 14:00:00','Actualización de software requerida','cerrada',NULL,3,3,NULL,'baja','01:01:01'),(6,'EQUIPOS',3,'2022-03-30 08:30:00',NULL,'Problema con el proyector','abierta','https://ejemplo.com/adjunto5.pdf',3,4,7,'alta',NULL),(7,'CUENTAS',1,'2022-03-31 10:15:00',NULL,'Solicitud de creación de cuenta','asignada',NULL,4,5,NULL,'media',NULL),(8,'WIFI',2,'2022-04-01 12:00:00','2022-04-02 14:45:00','Interrupción intermitente en la conexión Wi-Fi','cerrada',NULL,1,6,NULL,'baja',NULL),(33,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(34,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(35,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(36,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(37,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(38,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(39,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(40,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(41,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(42,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(43,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(44,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(45,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(46,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(47,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'media',NULL),(48,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,1,1,'baja',NULL),(49,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(50,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(51,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(52,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(53,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(54,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(55,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,1,'baja',NULL),(56,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL),(57,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL),(58,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(59,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(60,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(61,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(62,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(63,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,2,'baja',NULL),(64,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL),(65,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL),(66,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,10,'baja',NULL),(67,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,10,10,'baja',NULL),(68,'WIFI',1,'2022-03-06 09:45:00','2022-03-07 10:30:00','Problema con la señal Wi-Fi','resuelta',NULL,1,NULL,NULL,'baja',NULL);
 /*!40000 ALTER TABLE `incidencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -188,11 +188,11 @@ DROP TABLE IF EXISTS `incidencias_subtipos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `incidencias_subtipos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tipo` enum('EQUIPOS','CUENTAS','WIFI','INTERNET','SOFTWARE') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `subtipo_nombre` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `sub_subtipo` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo` enum('EQUIPOS','CUENTAS','WIFI','INTERNET','SOFTWARE') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `subtipo_nombre` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `sub_subtipo` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -214,13 +214,14 @@ DROP TABLE IF EXISTS `perfiles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `perfiles` (
   `personal_id` int NOT NULL,
-  `dominio` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `educantabria` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `perfil` enum('administrador','profesor','otros') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'profesor',
+  `dominio` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `educantabria` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `perfil` enum('administrador','profesor','otros') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT 'profesor',
   PRIMARY KEY (`personal_id`),
+  UNIQUE KEY `educantabria_UNIQUE` (`educantabria`),
   CONSTRAINT `fk_perfiles_personal` FOREIGN KEY (`personal_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -229,7 +230,7 @@ CREATE TABLE `perfiles` (
 
 LOCK TABLES `perfiles` WRITE;
 /*!40000 ALTER TABLE `perfiles` DISABLE KEYS */;
-INSERT INTO `perfiles` VALUES (1,NULL,'aa','$2a$10$VG9EV6JvUlBbGjmf7Wn2uOh53C0YcsdXJd5/2gGTDr98nlvPXaAxW','administrador'),(2,NULL,'b','$2a$10$WJcL2V7MiEDCTc/d4BRSNuIqoidTUgyOYJMyV3/NCexLkuJOa60Xq','profesor'),(3,'dom003','carlos.fernandez@educantabria.es','90fe2049445178a1840bd71dc6c07ce8','administrador'),(4,'dom004','elena.gutierrez@educantabria.es','9794230d6e317739e0d2a1be87becb94','profesor'),(5,'dom005','javier.sanchez@educantabria.es','6bf1c4df57af5ade48b354bf959b4464','administrador'),(6,'dom006','laura.sanchez@educantabria.es','91a81c79944c294500eca88bd906ed13','profesor'),(7,'dom007','sergio.martinez@educantabria.es','1abc9603f106657665bcdd608f302b0b','profesor'),(8,'dom008','isabel.fernandez@educantabria.es','8b07327223bcdd1a7c4e16fd9bf04831','profesor'),(9,'dom009','pablo.gutierrez@educantabria.es','39bcf9ff587fa61fef01735543b25e60','profesor'),(10,NULL,'a','$2a$10$r6Ebw6DEFBD0CZu.VpBpHeI4DF3etnzVud4l7gx.06ZD2YgnJEc9i','administrador');
+INSERT INTO `perfiles` VALUES (1,NULL,'m','$2a$10$AC6jkMWKSXjPsfoa0hPq6uCG7UG0se39duSLiK0ey9jw2r4K514t6','administrador'),(2,NULL,'b','$2a$10$WJcL2V7MiEDCTc/d4BRSNuIqoidTUgyOYJMyV3/NCexLkuJOa60Xq','profesor'),(3,'dom003','carlos.fernandez@educantabria.es','90fe2049445178a1840bd71dc6c07ce8','administrador'),(4,'dom004','elena.gutierrez@educantabria.es','9794230d6e317739e0d2a1be87becb94','profesor'),(5,'dom005','javier.sanchez@educantabria.es','6bf1c4df57af5ade48b354bf959b4464','administrador'),(6,'dom006','laura.sanchez@educantabria.es','91a81c79944c294500eca88bd906ed13','profesor'),(7,'dom007','sergio.martinez@educantabria.es','1abc9603f106657665bcdd608f302b0b','profesor'),(8,'dom008','isabel.fernandez@educantabria.es','8b07327223bcdd1a7c4e16fd9bf04831','profesor'),(9,'dom009','pablo.gutierrez@educantabria.es','39bcf9ff587fa61fef01735543b25e60','profesor'),(10,NULL,'a','$2a$10$r6Ebw6DEFBD0CZu.VpBpHeI4DF3etnzVud4l7gx.06ZD2YgnJEc9i','administrador');
 /*!40000 ALTER TABLE `perfiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -242,21 +243,21 @@ DROP TABLE IF EXISTS `personal`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `dni` char(9) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `apellido1` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
-  `apellido2` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `direccion` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `localidad` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `cp` char(5) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `tlf` char(9) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `dni` char(9) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `apellido1` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `apellido2` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `direccion` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `localidad` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `cp` char(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `tlf` char(9) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `activo` tinyint DEFAULT '1',
   `departamento_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `dni_UNIQUE` (`dni`),
   KEY `fk_personal_departamentos1_idx` (`departamento_id`),
   CONSTRAINT `fk_personal_departamentos1` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -278,4 +279,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-19 20:09:47
+-- Dump completed on 2024-02-21  5:01:54

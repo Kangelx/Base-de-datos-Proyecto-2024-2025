@@ -43,8 +43,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeRequests(auth -> auth
-                        .requestMatchers("/login").permitAll()  // Permite el acceso a todos para /login
-                        .anyRequest().authenticated())  // Todos los demás requests requieren autenticación
+                        .requestMatchers("/login", "/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**", "/webjars/**", "/swagger-resources/**").permitAll()
+                        .anyRequest().authenticated())
                 .addFilterBefore(new JwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return httpSecurity.build();

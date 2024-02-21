@@ -156,6 +156,7 @@ public class IncidenciaController {
         incidenciaEnt.setEstado(incidenciaDTO.getEstado());
         incidenciaEnt.setAdjuntoUrl(incidenciaDTO.getAdjuntoUrl());
         incidenciaEnt.setPrioridad(incidenciaDTO.getPrioridad());
+        incidenciaEnt.setTiempo(incidenciaDTO.getTiempo());
 
         // Actualizar el responsable si se proporciona
         if (incidenciaDTO.getResponsableId() != null) {
