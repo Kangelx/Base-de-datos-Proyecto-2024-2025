@@ -216,7 +216,7 @@ CREATE TABLE `perfiles` (
   `personal_id` int NOT NULL,
   `dominio` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `educantabria` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `perfil` enum('administrador','profesor','otros') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT 'profesor',
   PRIMARY KEY (`personal_id`),
   UNIQUE KEY `educantabria_UNIQUE` (`educantabria`),
@@ -269,6 +269,31 @@ LOCK TABLES `personal` WRITE;
 INSERT INTO `personal` VALUES (1,'00349999q','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,4),(2,'22349678l','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,NULL),(3,'34567890C','Carlos','Fernández','García','Plaza Central 789','Torrelavega','28003','456789012',0,3),(4,'45678901D','Elena','Gutiérrez','Hernández','Ronda de la Montaña 567','Torrelavega','28004','789012345',1,1),(5,'12349678A','Juan','Gómez','López','Calle Principal 123','Torrelavega','28001','123456789',1,1),(6,'67890123G','Laura','Sánchez','Pérez','Ronda de la Montaña 567','Torrelavega','28004','789012345',1,2),(7,'78901234H','Sergio','Martínez','Gómez','Avenida Principal 789','Torrelavega','28005','123456789',0,3),(8,'89012345I','Isabel','Fernández','García','Plaza Central 012','Reinosa','28006','234567890',1,1),(9,'90123456J','Pablo','Gutiérrez','Hernández','Ronda Secundaria 345','Torrelavega','28007','345678901',1,1),(10,'01234567K','Eva','Ruiz','Sánchez','Camino del Bosque 678','Cabezón de la Sal','28008','456789012',1,2),(12,'23456789M','Natalia','Hernández','Gómez','Plaza del Pueblo 234','Castro Urdiales','28010','678901234',0,5),(13,'34567890N','Alejandro','Gómez','Ruiz','Sendero del Río 567','Torrelavega','28011','789012345',1,5),(14,'45678901O','Clara','López','Fernández','Calle Principal 789','Santander','28012','890123456',1,4),(15,'56789012P','Alberto','Ruiz','Martínez','Avenida Secundaria 012','Torrelavega','28013','901234567',1,4),(16,'67890123Q','Sara','Martín','Gómez','Plaza Central 345','Santander','28014','012345678',0,4),(17,'78901234R','Diego','Sánchez','Hernández','Ronda del Bosque 678','Torrelavega','28015','123456789',1,2),(18,'89012345S','Lucía','Hernández','Ruiz','Camino del Río 901','Torrelavega','28016','234567890',1,3),(19,'90123456T','Jorge','Ruiz','Gómez','Sendero Secundario 234','Santander','28017','345678901',1,3),(20,'22349678q','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,NULL),(22,'12345978A','Juan','Gómez','López','Calle Principal 123','Torrelavega','28001','123456789',1,2),(23,'12345178A','AAAA','Gómez','López','Calle Principal 123','Torrelavega','28001','123456789',1,2),(26,'92349678A','Juan','Gómez','López','Calle Principal 123','Torrelavega','28001','123456789',1,1),(27,'22349678A','Juan','Gómez','López','Calle Principal 123','Torrelavega','28001','123456789',1,1),(28,'22349678Y','Juan','Gómez','López','Calle Principal 123','Torrelavega','28001','123456789',1,1),(30,'22349678g','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,1),(31,'22349678h','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,1),(32,'22349678b','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,1),(34,'22349678ñ','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,1),(36,'22349678t','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,NULL),(37,'99349999q','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,1),(39,'99349909q','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,1),(41,'99349900q','Juan','Gómez','López','Calle Principal 123','Torrelavega',NULL,'123456789',1,NULL);
 /*!40000 ALTER TABLE `personal` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios_api`
+--
+
+DROP TABLE IF EXISTS `usuarios_api`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios_api` (
+  `username` varchar(50) NOT NULL,
+  `password` varchar(600) NOT NULL,
+  `rol` enum('administrador','profesor') NOT NULL,
+  PRIMARY KEY (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios_api`
+--
+
+LOCK TABLES `usuarios_api` WRITE;
+/*!40000 ALTER TABLE `usuarios_api` DISABLE KEYS */;
+INSERT INTO `usuarios_api` VALUES ('a','$2a$10$yZaHf0x9ZEyQtYmcZZh3nOSxi2Nm99rWwZJqBD1ecOUME1.dHPBEi','administrador'),('m','$2a$10$ZYWkm8sanOSQV5XR8E3mU.Y/5kaQnxxdciY3nAN9A80Fsvnvepqly','administrador');
+/*!40000 ALTER TABLE `usuarios_api` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -279,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-21  5:01:54
+-- Dump completed on 2024-02-23  2:48:45
