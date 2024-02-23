@@ -9,7 +9,7 @@ public class DevolverTodoDTO {
     private String nombre;
     private AuthTokenResponse token;
     private List<IncidenciaDTO> listaIncidencias;
-    private int id;
+    private Integer id;
 
     public DevolverTodoDTO() {
     }
@@ -45,11 +45,11 @@ public class DevolverTodoDTO {
         this.listaIncidencias = listaIncidencias;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 }

@@ -52,38 +52,44 @@ public class AuthController {
     public ResponseEntity<DevolverTodoDTO> login(@RequestBody LoginData loginData) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginData.getUsername(), loginData.getPassword()));
-        Integer personalId = 0;
-        List<IncidenciaDTO> listaAMeter = new ArrayList<>();
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String token = jwtTokenUtil.generateToken(authentication);
+
+        UsuariosApiEntity usuarioApi = usuarioApiRepository.findByUsername(loginData.getUsername());
+        if (usuarioApi == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        DevolverTodoDTO devolver = new DevolverTodoDTO();
         PerfilesEntity perfil = perfilRepository.findByEducantabria(loginData.getUsername());
-        UsuariosApiEntity usuarioApi=usuarioApiRepository.findByUsername(loginData.getUsername());
+        List<IncidenciaDTO> listaAMeter = new ArrayList<>();
+        Integer personalId = null;
+        String nombre = null;
         if (perfil != null) {
             personalId = perfil.getPersonalId();
-            PersonalEntity persona = personalRepository.getById(personalId);
+            PersonalEntity persona = personalRepository.findById(personalId).orElse(null);
+            nombre = persona != null ? persona.getNombre() : null;
             List<IncidenciasEntity> listaIncidencias = incidenciaService.getIncidencias();
             for (IncidenciasEntity inci : listaIncidencias) {
-                IncidenciaDTO incidenciaAMeter = new IncidenciaDTO(inci);
-                Integer creadorId = inci.getCreadorId() != null ? inci.getCreadorId().getId() : null;
-                Integer equipoId = inci.getEquipoId() != null ? inci.getEquipoId().getId() : null;
-                Integer responsableId = inci.getResponsableId() != null ? inci.getResponsableId().getId() : null;
-                Integer subtipoId = inci.getSubtipoId() != null ? inci.getSubtipoId().getId() : null;
-                incidenciaAMeter.setCreadorId(creadorId);
-                incidenciaAMeter.setEquipoId(equipoId);
-                incidenciaAMeter.setResponsableId(responsableId);
-                incidenciaAMeter.setSubtipoId(subtipoId);
-                if (creadorId != null && creadorId.equals(personalId)) {
+
+                if (inci.getCreadorId() != null && inci.getCreadorId().getId()==personalId) {
+
+                    IncidenciaDTO incidenciaAMeter = new IncidenciaDTO(inci);
+                    incidenciaAMeter.setCreadorId(inci.getCreadorId() != null ? inci.getCreadorId().getId() : null);
+                    incidenciaAMeter.setEquipoId(inci.getEquipoId() != null ? inci.getEquipoId().getId() : null);
+                    incidenciaAMeter.setResponsableId(inci.getResponsableId() != null ? inci.getResponsableId().getId() : null);
+                    incidenciaAMeter.setSubtipoId(inci.getSubtipoId() != null ? inci.getSubtipoId().getId() : null);
                     listaAMeter.add(incidenciaAMeter);
                 }
             }
-            String nombre = persona != null ? persona.getNombre() : null;
-            DevolverTodoDTO devolver = new DevolverTodoDTO();
-            String token = jwtTokenUtil.generateToken(authentication);
-            devolver.setToken(new AuthTokenResponse(token));
-            devolver.setId(personalId);
-            devolver.setListaIncidencias(listaAMeter);
-            devolver.setNombre(nombre);
-            return ResponseEntity.ok().body(devolver);
         }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        devolver.setId(personalId);
+        devolver.setListaIncidencias(listaAMeter);
+        devolver.setToken(new AuthTokenResponse(token));
+        devolver.setNombre(nombre);
+
+        return ResponseEntity.ok().body(devolver);
+
     }
 
     @PostMapping("/register")
