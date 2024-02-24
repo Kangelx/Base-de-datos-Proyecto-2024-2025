@@ -70,9 +70,7 @@ public class AuthController {
             nombre = persona != null ? persona.getNombre() : null;
             List<IncidenciasEntity> listaIncidencias = incidenciaService.getIncidencias();
             for (IncidenciasEntity inci : listaIncidencias) {
-
-                if (inci.getCreadorId() != null && inci.getCreadorId().getId()==personalId) {
-
+                if (inci.getCreadorId() != null && inci.getCreadorId().getId() == personalId) {
                     IncidenciaDTO incidenciaAMeter = new IncidenciaDTO(inci);
                     incidenciaAMeter.setCreadorId(inci.getCreadorId() != null ? inci.getCreadorId().getId() : null);
                     incidenciaAMeter.setEquipoId(inci.getEquipoId() != null ? inci.getEquipoId().getId() : null);
@@ -82,16 +80,12 @@ public class AuthController {
                 }
             }
         }
-
         devolver.setId(personalId);
         devolver.setListaIncidencias(listaAMeter);
         devolver.setToken(new AuthTokenResponse(token));
         devolver.setNombre(nombre);
-
         return ResponseEntity.ok().body(devolver);
-
     }
-
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegistroUsuarioDto usuarioDto) {
         // Verificar si el usuario ya existe

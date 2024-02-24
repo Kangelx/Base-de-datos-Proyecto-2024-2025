@@ -50,7 +50,6 @@ public class DepartamentoService {
         }
         return null;
     }
-
     public Boolean deleteDepartamento(Integer id) {
         try {
             departamentoRepository.deleteById(id);
