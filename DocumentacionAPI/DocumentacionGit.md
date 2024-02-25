@@ -100,6 +100,8 @@ FileBase64Controller
 
 Define objetos de transferencia de datos para encapsular la información y pasarla entre las capas.
 
+ArchivoDTO
+
 ComentarioDTO
 
 DepartamentoDTO
@@ -411,7 +413,7 @@ GET /excel/incidenciasUsuarios -> Genera un archivo excel el cual contiene una l
 
 Contiene el controlador utilizado para decodificar los archivos adjuntos de codificación base64 a binario y viceversa.
 
-POST /adjuntos/subir -> Convierte el archivo adjunto en código base64 a binario y lo guarda en la carpeta correspondiente, guardado la uri de la dirección en la BD.
+POST /adjuntos/subir/{tipo}/id -> Convierte el archivo adjunto en código base64 a binario y lo guarda en la carpeta correspondiente, guardando la uri de la dirección en la BD. Debe introducirse el {tipo} por parámetro, el cual debe ser `comentario` o `incidencia`, así como el ID del comentario o incidencia al cual se quiera asignar el archivo adjunto.
 GET /adjuntos/descargar/{nombre} ->Codifica el archivo adjunto, cuyo nombre se pase por parámetro, de binario a base64 para que el usuario cliente pueda descargarlo.
 
 # Capa dto
