@@ -32,7 +32,7 @@ public class PerfilController {
             Integer perfilId = perfil.getPersonalId();
             Optional<PerfilesEntity> existingPerfilOptional = perfilService.getById(perfilId);
             if (existingPerfilOptional.isPresent()) {
-                // El ID ya existe, devolver un mensaje de error
+
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("El perfil con el ID proporcionado ya existe.");
             }
 
@@ -40,7 +40,6 @@ public class PerfilController {
             PerfilesEntity savedPerfil = perfilService.savePerfil(perfil);
             return ResponseEntity.ok(savedPerfil);
         } catch (Exception e) {
-            // Si ocurre algún error durante el proceso de guardado, devolver un mensaje de error interno del servidor
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el perfil: " + e.getMessage());
         }
     }
@@ -68,7 +67,7 @@ public class PerfilController {
             PerfilesEntity updatedPerfil = perfilService.updateById(request, id);
             return ResponseEntity.ok(updatedPerfil);
         } catch (Exception e) {
-            // Si ocurre algún error durante el proceso de actualización, devolver un mensaje de error interno del servidor
+
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el perfil: " + e.getMessage());
         }
     }

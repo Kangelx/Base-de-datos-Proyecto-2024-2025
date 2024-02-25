@@ -104,7 +104,7 @@ public class DepartamentoController {
 
             if (departamentoService.getById(request.getId()) != null) {
                 departamentoService.saveDepartamento(depEnt);
-                return ResponseEntity.ok(depEnt); // Retorna la entidad actualizada
+                return ResponseEntity.ok(depEnt);
             } else {
                 throw new IllegalArgumentException("No se encontró ningún departamento con el ID proporcionado.");
             }

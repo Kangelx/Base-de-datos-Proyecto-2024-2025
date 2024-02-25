@@ -39,7 +39,6 @@ public class EquipoController {
         // Verificar si el equipo ya existe en la base de datos
         Optional<EquiposEntity> existingEquipoOptional = equipoService.getById(equipoId);
         if (existingEquipoOptional.isPresent()) {
-            // El equipo ya existe, lanzar una excepción o devolver un mensaje de error
             throw new IllegalStateException("No se puede modificar un equipo existente. Use un endpoint PUT para actualizar equipos.");
         }
 

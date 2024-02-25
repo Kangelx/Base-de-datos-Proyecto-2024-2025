@@ -64,7 +64,7 @@ public class IncidenciaController {
             // Verificar si el ID ya existe
             Optional<IncidenciasEntity> existingIncidencia = incidenciaService.getById(incidenciaId);
             if (existingIncidencia.isPresent()) {
-                // Si el ID ya existe, lanzar un error
+
                 return ResponseEntity.badRequest().body("La incidencia con el ID " + incidenciaDTO.getNum() + " no existe.");
             } else {
                 responsableId = incidenciaDTO.getResponsableId();

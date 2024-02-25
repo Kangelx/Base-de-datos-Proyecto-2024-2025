@@ -28,7 +28,6 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User not found with username: " + username);
         }
 
-        // Asume que PerfilEnum tiene un método name() que devuelve el nombre del enumerado como String
         String roleName = usuarioApi.getRol().name();
 
         List<GrantedAuthority> authorities = Collections.singletonList(

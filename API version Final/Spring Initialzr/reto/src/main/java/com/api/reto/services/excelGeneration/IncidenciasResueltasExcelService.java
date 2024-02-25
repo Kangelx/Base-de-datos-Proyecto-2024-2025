@@ -32,7 +32,7 @@ public class IncidenciasResueltasExcelService {
         String fechaActual = sdf.format(new Date());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String nombreArchivo = "IncidenciasResueltas_" + fechaActual + ".xlsx";
-        // Asegúrate de que la carpeta "Informes" exista o ajusta la ruta según tu configuración.
+
         String directorio = "Informes";
         String rutaArchivo = directorio + "/" + nombreArchivo;
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
@@ -45,7 +45,7 @@ public class IncidenciasResueltasExcelService {
                     .collect(Collectors.toList());
             Sheet hoja = workbook.createSheet("Incidencias Resueltas");
 
-            // Configuración inicial del documento Excel (estilos de celda, fuentes, etc.)
+
             CellStyle headerStyle = workbook.createCellStyle();
             Font font = workbook.createFont();
             font.setBold(true);
@@ -69,7 +69,7 @@ public class IncidenciasResueltasExcelService {
                 cellId.setCellValue(incidencia.getNum());
 
                 Cell cellTipo = row.createCell(1);
-                cellTipo.setCellValue(incidencia.getTipo().name()); // Asumiendo que Tipo es un enum
+                cellTipo.setCellValue(incidencia.getTipo().name());
 
                 Cell cellFechaCreacion = row.createCell(2);
                 String fechaCreacionStr = incidencia.getFechaCreacion() != null ? dateFormat.format(incidencia.getFechaCreacion()) : "N/A";
@@ -84,7 +84,7 @@ public class IncidenciasResueltasExcelService {
                 cellDescripcion.setCellValue(incidencia.getDescripcion());
 
                 Cell cellEstado = row.createCell(5);
-                cellEstado.setCellValue(incidencia.getEstado().name()); // Asumiendo que Estado es un enum
+                cellEstado.setCellValue(incidencia.getEstado().name());
 
                 Cell cellTiempo = row.createCell(6);
                 if(incidencia.getTiempo() != null) {
@@ -114,6 +114,6 @@ public class IncidenciasResueltasExcelService {
         } catch (Exception e) {
             throw new Exception("Error al generar el archivo Excel de incidencias resueltas", e);
         }
-        return rutaArchivo; // Retorna la ruta del archivo generado y guardado
+        return rutaArchivo;
     }
 }

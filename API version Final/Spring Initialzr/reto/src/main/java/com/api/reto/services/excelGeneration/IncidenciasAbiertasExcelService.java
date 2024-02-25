@@ -32,13 +32,13 @@ public class IncidenciasAbiertasExcelService {
         Map<String, Object[]> data = new LinkedHashMap<>(); // LinkedHashMap para mantener el orden de inserción
         data.put("1", new Object[]{"ID Incidencia", "Tipo", "Fecha Inicio", "Fecha Fin", "Estado", "ID Usuario", "Nombre", "Apellido 1", "Apellido 2"});
 
-        // Estilo para la cabecera (negrita)
+
         XSSFCellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
         style.setFont(font);
 
-        int rowNumber = 0; // Comenzamos desde 0
+        int rowNumber = 0;
         for (String key : data.keySet()) {
             Row row = sheet.createRow(rowNumber++);
             Object[] objArr = data.get(key);
@@ -48,7 +48,7 @@ public class IncidenciasAbiertasExcelService {
                 if (obj != null) {
                     if (obj instanceof String) {
                         cell.setCellValue((String) obj);
-                        // Aplicar estilo a la celda
+
                         cell.setCellStyle(style);
                     }
                 }
@@ -56,7 +56,7 @@ public class IncidenciasAbiertasExcelService {
         }
 
         for (IncidenciasEntity inc : todasLasIncidencias) {
-            PersonalEntity usuario = inc.getCreadorId(); // Asume getCreadorId() obtiene el usuario
+            PersonalEntity usuario = inc.getCreadorId();
             Row row = sheet.createRow(rowNumber++);
             row.createCell(0).setCellValue(inc.getNum());
             row.createCell(1).setCellValue(inc.getTipo().toString());

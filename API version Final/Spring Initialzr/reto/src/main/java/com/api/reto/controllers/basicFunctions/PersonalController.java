@@ -35,7 +35,6 @@ public class PersonalController {
             Integer personaId = personaDTO.getId();
             Optional<PersonalEntity> existingPersonaOptional = personalService.getById(personaId);
             if (existingPersonaOptional.isPresent()) {
-                // El ID de la persona ya existe, devolver un mensaje de error
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El ID de la persona proporcionado ya existe.");
             }
 
@@ -95,9 +94,9 @@ public class PersonalController {
             // Guardar la entidad personal actualizada
             personalService.savePersonal(personal);
 
-            return ResponseEntity.ok(personal); // Retorna la entidad actualizada
+            return ResponseEntity.ok(personal);
         } catch (IllegalArgumentException e) {
-            // Manejo de excepciones
+
             e.printStackTrace();
             return ResponseEntity.badRequest().body(e.getMessage());
         }
