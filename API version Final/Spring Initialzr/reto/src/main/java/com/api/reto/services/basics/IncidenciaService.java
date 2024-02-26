@@ -5,6 +5,7 @@ import com.api.reto.enums.EstadoEnum;
 import com.api.reto.enums.TipoEnum;
 import com.api.reto.models.IncidenciasEntity;
 import com.api.reto.repositories.IIncidenciasRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,5 +103,14 @@ public class IncidenciaService {
             throw new Exception("Error al generar el Excel de incidencias por usuario", e);
         }
         return rutaArchivo;
+    }
+
+    //Adjuntos
+
+    public void actualizarUrlAdjuntoIncidencia(Integer incidenciaId, String urlAdjunto) {
+        IncidenciasEntity incidencia = incidenciasRepository.findById(incidenciaId)
+                .orElseThrow(() -> new EntityNotFoundException("Incidencia no encontrada"));
+        incidencia.setAdjuntoUrl(urlAdjunto);
+        incidenciasRepository.save(incidencia);
     }
 }

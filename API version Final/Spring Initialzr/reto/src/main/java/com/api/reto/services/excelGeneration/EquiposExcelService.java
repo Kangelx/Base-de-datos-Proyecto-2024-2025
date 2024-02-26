@@ -49,8 +49,8 @@ public class EquiposExcelService {
             row.createCell(4).setCellValue(equipo.getMarca());
             row.createCell(5).setCellValue(equipo.getModelo());
             row.createCell(6).setCellValue(equipo.getDescripcion());
-            row.createCell(7).setCellValue(equipo.getBaja() != null ? equipo.getBaja() : 0); // Si es nulo, poner 0
-            row.createCell(8).setCellValue(equipo.getPuesto() != null ? equipo.getPuesto() : 0); // Si es nulo, poner 0
+            row.createCell(7).setCellValue(equipo.getBaja() != null ? equipo.getBaja() : 0);
+            row.createCell(8).setCellValue(equipo.getPuesto() != null ? equipo.getPuesto() : 0);
         }
 
         // Ajustar el ancho de las columnas automáticamente

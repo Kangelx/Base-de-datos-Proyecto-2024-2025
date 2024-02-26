@@ -34,7 +34,6 @@ public class AdministradorTiempoDedicadoExcelService {
             CellStyle headerCellStyle = workbook.createCellStyle();
             headerCellStyle.setFont(headerFont);
 
-            // Asumiendo estas son todas las propiedades de IncidenciasEntity que quieres incluir
             String[] headers = {"ID", "Tipo", "Subtipo ID", "Estado", "Descripción", "Adjunto URL", "Tiempo",
                     "Responsable ID", "Fecha Creación", "Fecha Cierre", "Prioridad"};
             Row headerRow = sheet.createRow(0);
@@ -54,10 +53,10 @@ public class AdministradorTiempoDedicadoExcelService {
                 row.createCell(3).setCellValue(incidencia.getEstado().toString());
                 row.createCell(4).setCellValue(incidencia.getDescripcion());
                 row.createCell(5).setCellValue(incidencia.getAdjuntoUrl() != null ? incidencia.getAdjuntoUrl() : "N/A");
-                // Asumiendo que tiempo es un java.sql.Time o similar que necesita ser formateado
+
                 if (incidencia.getTiempo() != null) {
-                    // La implementación específica de la conversión depende de cómo esté almacenado tiempo
-                    row.createCell(6).setCellValue(incidencia.getTiempo().toString()); // Ajustar según sea necesario
+
+                    row.createCell(6).setCellValue(incidencia.getTiempo().toString());
                 } else {
                     row.createCell(6).setCellValue("N/A");
                 }

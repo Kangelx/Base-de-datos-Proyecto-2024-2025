@@ -4,6 +4,7 @@ import com.api.reto.dto.ComentarioDTO;
 import com.api.reto.models.AulasEntity;
 import com.api.reto.models.ComentariosEntity;
 import com.api.reto.repositories.IComentarioRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,4 +49,11 @@ public class ComentariosService {
         }
     }
 
+    //Adjuntos
+    public void actualizarUrlAdjuntoComentario(Integer comentarioId, String urlAdjunto) {
+        ComentariosEntity comentario = comentarioRepository.findById(comentarioId)
+                .orElseThrow(() -> new EntityNotFoundException("Comentario no encontrado"));
+        comentario.setAdjuntoUrl(urlAdjunto);
+        comentarioRepository.save(comentario);
+    }
 }

@@ -16,13 +16,11 @@ import java.util.Optional;
 public class IncidenciaSubtipoController {
     @Autowired
     private IncidenciaSubtiposService incidenciaSubtiposService;
-
     @GetMapping
     @PreAuthorize("hasAuthority('administrador')")
     public ArrayList<IncidenciasSubtiposEntity> getIncidenciaSubtipo() {
         return this.incidenciaSubtiposService.getIncidenciasSubtipos();
     }
-
     @PostMapping("")
     @PreAuthorize("hasAuthority('administrador')")
     public ResponseEntity<?> saveIncidenciaSubtipo(@RequestBody IncidenciasSubtiposEntity incidenciaSubtipo) {
@@ -36,7 +34,6 @@ public class IncidenciaSubtipoController {
                     return ResponseEntity.status(HttpStatus.CONFLICT).body("El ID proporcionado ya existe.");
                 }
             }
-
             IncidenciasSubtiposEntity savedSubtipo = incidenciaSubtiposService.saveIncidenciaSubtipo(incidenciaSubtipo);
             return ResponseEntity.ok(savedSubtipo);
         } catch (Exception e) {
@@ -44,13 +41,11 @@ public class IncidenciaSubtipoController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el subtipo de incidencia: " + e.getMessage());
         }
     }
-
     @GetMapping(path = "/{id}")
     @PreAuthorize("hasAuthority('administrador')")
     public Optional<IncidenciasSubtiposEntity> getIncidenciaSubtipoById(@PathVariable Integer id) {
         return this.incidenciaSubtiposService.getById(id);
     }
-
     @PutMapping("")
     @PreAuthorize("hasAuthority('administrador')")
     public ResponseEntity<?> updateIncidenciaSubtipoById(@RequestBody IncidenciasSubtiposEntity request) {
@@ -62,11 +57,9 @@ public class IncidenciaSubtipoController {
 
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El ID proporcionado no existe.");
             }
-
             IncidenciasSubtiposEntity updatedSubtipo = this.incidenciaSubtiposService.updateById(request, id);
             return ResponseEntity.ok(updatedSubtipo);
         } catch (Exception e) {
-            // Si ocurre algún error durante el proceso de actualización, devolver un mensaje de error interno del servidor
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al actualizar el subtipo de incidencia: " + e.getMessage());
         }
     }
