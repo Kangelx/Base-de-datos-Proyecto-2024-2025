@@ -1,4 +1,6 @@
 # AlpacApp Incidents
+![AlpacApp Incidents](https://github.com/Kangelx/Base-de-datos-Proyecto-2024-2025/assets/119075863/b050ec80-3a7d-461e-9adc-8b08df20b509)
+
 ## PROYECTO INTERMODULAR EQUIPO 3: API y Seguridad - Acceso a Datos/PSP
 ## [Página Principal](https://github.com/Kangelx/Proyecto2024-2025/blob/main/README.md)
 </head>
