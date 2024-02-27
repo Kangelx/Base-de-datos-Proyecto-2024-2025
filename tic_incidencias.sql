@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.29, for Win64 (x86_64)
 --
 -- Host: localhost    Database: tic_incidencias
 -- ------------------------------------------------------
--- Server version	8.0.31
+-- Server version	8.0.29
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -24,11 +24,11 @@ DROP TABLE IF EXISTS `aulas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `aulas` (
   `num` int NOT NULL,
-  `codigo` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `descripcion` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `codigo` varchar(8) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `descripcion` varchar(100) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
   `planta` int NOT NULL,
   PRIMARY KEY (`num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -50,17 +50,17 @@ DROP TABLE IF EXISTS `comentarios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `comentarios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `texto` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `texto` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
   `fechahora` datetime NOT NULL,
   `incidencia_num` int NOT NULL,
   `personal_id` int NOT NULL,
-  `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
+  `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci,
   PRIMARY KEY (`id`),
   KEY `fk_comentarios_incidencias1_idx` (`incidencia_num`),
   KEY `fk_comentarios_personal1_idx` (`personal_id`),
   CONSTRAINT `fk_comentarios_incidencias1` FOREIGN KEY (`incidencia_num`) REFERENCES `incidencias` (`num`),
   CONSTRAINT `fk_comentarios_personal1` FOREIGN KEY (`personal_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `comentarios` (
 
 LOCK TABLES `comentarios` WRITE;
 /*!40000 ALTER TABLE `comentarios` DISABLE KEYS */;
-INSERT INTO `comentarios` VALUES (1,'Este es un comentario inicial','2024-02-01 10:30:00',1,3,''),(2,'Incidencia en proceso de resolución','2024-02-02 12:45:00',1,5,''),(3,'Adjunto de evidencia enviado','2024-02-03 15:20:00',1,3,'adjunto1.jpg'),(4,'Resuelto satisfactoriamente','2024-02-04 09:10:00',1,5,''),(5,'Solicitud de más información al profesor','2024-02-05 11:05:00',2,8,''),(6,'Esperando respuesta del profesor','2024-02-06 14:30:00',2,5,''),(7,'Incidencia cerrada','2024-02-07 08:45:00',2,8,''),(8,'Comentario sin adjunto','2024-02-08 10:20:00',3,7,''),(9,'Incidencia reabierta para revisión','2024-02-09 13:15:00',3,3,''),(10,'Holka','2024-02-01 10:30:00',2,10,NULL),(11,'za','2024-02-01 10:30:00',1,1,NULL),(12,'Este es un comentario inicial','2024-02-01 10:30:00',1,1,''),(13,'Este es un comentario inicial','2024-02-01 10:30:00',1,1,''),(14,'a','2024-02-01 10:30:00',1,1,''),(15,'a','2024-02-01 10:30:00',1,1,''),(16,'bbbbb','2024-02-01 10:30:00',1,1,''),(17,'bbbbb','2024-02-01 10:30:00',1,1,''),(18,'aaaaa','2024-02-01 10:30:00',1,1,'');
+INSERT INTO `comentarios` VALUES (1,'Este es un comentario inicial','2024-02-01 10:30:00',1,3,'archivosAdjuntos/foto.jpg_20240226185137'),(2,'Incidencia en proceso de resolución','2024-02-02 12:45:00',1,5,''),(3,'Adjunto de evidencia enviado','2024-02-03 15:20:00',1,3,'adjunto1.jpg'),(4,'Resuelto satisfactoriamente','2024-02-04 09:10:00',1,5,''),(5,'Solicitud de más información al profesor','2024-02-05 11:05:00',2,8,''),(6,'Esperando respuesta del profesor','2024-02-06 14:30:00',2,5,''),(7,'Incidencia cerrada','2024-02-07 08:45:00',2,8,''),(8,'Comentario sin adjunto','2024-02-08 10:20:00',3,7,''),(9,'Incidencia reabierta para revisión','2024-02-09 13:15:00',3,3,''),(10,'Holka','2024-02-01 10:30:00',2,10,NULL),(11,'za','2024-02-01 10:30:00',1,1,NULL),(12,'Este es un comentario inicial','2024-02-01 10:30:00',1,1,''),(13,'Este es un comentario inicial','2024-02-01 10:30:00',1,1,''),(14,'a','2024-02-01 10:30:00',1,1,''),(15,'a','2024-02-01 10:30:00',1,1,''),(16,'bbbbb','2024-02-01 10:30:00',1,1,''),(17,'bbbbb','2024-02-01 10:30:00',1,1,''),(18,'aaaaa','2024-02-01 10:30:00',1,1,'');
 /*!40000 ALTER TABLE `comentarios` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,14 +82,14 @@ DROP TABLE IF EXISTS `departamentos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `departamentos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `cod` char(6) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `nombre` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `cod` char(6) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `nombre` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
   `activo` tinyint NOT NULL DEFAULT '1',
   `jefedep_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_departamentos_personal1_idx` (`jefedep_id`),
   CONSTRAINT `fk_departamentos_personal1` FOREIGN KEY (`jefedep_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -111,19 +111,19 @@ DROP TABLE IF EXISTS `equipos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `equipos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tipo_equipo` enum('ALTAVOCES','IMPRESORA','MONITOR','PANTALLA_INTERACTIVA','PORTATIL_DE_AULA','PORTATIL_CONSEJERIA','PROYECTOR') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `tipo_equipo` enum('ALTAVOCES','IMPRESORA','MONITOR','PANTALLA_INTERACTIVA','PORTATIL_DE_AULA','PORTATIL_CONSEJERIA','PROYECTOR') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
   `fecha_adquisicion` date DEFAULT NULL,
-  `etiqueta` char(8) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `marca` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `modelo` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
+  `etiqueta` char(8) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `marca` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `modelo` varchar(45) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci,
   `baja` tinyint DEFAULT '0',
   `aula_num` int NOT NULL,
   `puesto` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_equipos_aulas1_idx` (`aula_num`),
   CONSTRAINT `fk_equipos_aulas1` FOREIGN KEY (`aula_num`) REFERENCES `aulas` (`num`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,17 +145,17 @@ DROP TABLE IF EXISTS `incidencias`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `incidencias` (
   `num` int NOT NULL AUTO_INCREMENT,
-  `tipo` enum('EQUIPOS','CUENTAS','WIFI','INTERNET','SOFTWARE') COLLATE utf8mb3_spanish_ci NOT NULL,
+  `tipo` enum('EQUIPOS','CUENTAS','WIFI','INTERNET','SOFTWARE') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
   `subtipo_id` int NOT NULL,
   `fecha_creacion` datetime NOT NULL,
   `fecha_cierre` datetime DEFAULT NULL,
-  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `estado` enum('abierta','asignada','en_proceso','enviada_a_Infortec','resuelta','cerrada') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci,
+  `descripcion` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `estado` enum('abierta','asignada','en_proceso','enviada_a_Infortec','resuelta','cerrada') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `adjunto_url` text CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci,
   `creador_id` int NOT NULL,
   `responsable_id` int DEFAULT NULL,
   `equipo_id` int DEFAULT NULL,
-  `prioridad` enum('baja','media','alta','critica') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
+  `prioridad` enum('baja','media','alta','critica') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
   `tiempo` time DEFAULT NULL,
   PRIMARY KEY (`num`),
   KEY `fk_incidencias_incidencias_subtipos1_idx` (`subtipo_id`),
@@ -166,7 +166,7 @@ CREATE TABLE `incidencias` (
   CONSTRAINT `fk_incidencias_incidencias_subtipos1` FOREIGN KEY (`subtipo_id`) REFERENCES `incidencias_subtipos` (`id`),
   CONSTRAINT `fk_incidencias_personal1` FOREIGN KEY (`creador_id`) REFERENCES `personal` (`id`),
   CONSTRAINT `fk_incidencias_personal2` FOREIGN KEY (`responsable_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,11 +188,11 @@ DROP TABLE IF EXISTS `incidencias_subtipos`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `incidencias_subtipos` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `tipo` enum('EQUIPOS','CUENTAS','WIFI','INTERNET','SOFTWARE') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `subtipo_nombre` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `sub_subtipo` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `tipo` enum('EQUIPOS','CUENTAS','WIFI','INTERNET','SOFTWARE') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `subtipo_nombre` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `sub_subtipo` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +201,7 @@ CREATE TABLE `incidencias_subtipos` (
 
 LOCK TABLES `incidencias_subtipos` WRITE;
 /*!40000 ALTER TABLE `incidencias_subtipos` DISABLE KEYS */;
-INSERT INTO `incidencias_subtipos` VALUES (1,'EQUIPOS','HOSTIAS',NULL),(2,'EQUIPOS','PC','RATÓN'),(3,'EQUIPOS','PC','TECLADO'),(4,'EQUIPOS','ALTAVOCES',NULL),(5,'EQUIPOS','MONITOR',NULL),(6,'EQUIPOS','PROYECTOR',NULL),(7,'EQUIPOS','PANTALLA',NULL),(8,'EQUIPOS','PANTALLA',NULL),(9,'EQUIPOS','PORTÁTIL','DE AULA'),(10,'EQUIPOS','IMPRESORA',NULL),(11,'CUENTAS','EDUCANTABRIA',NULL),(12,'CUENTAS','GOOGLE CLASSROOM',NULL),(13,'CUENTAS','DOMINIO',NULL),(14,'CUENTAS','YEDRA','GESTIONA J.EST.'),(15,'WIFI','iesmiguelherrero',NULL),(16,'WIFI','WIECAN',NULL),(17,'INTERNET','INSTALACIÓN',NULL),(18,'INTERNET','ACTUALIZACIÓN',NULL),(19,'EQUIPOS','PC','ZAP'),(20,'EQUIPOS','A','ORDENADOR'),(21,'EQUIPOS','A','ORDENADOR'),(22,'EQUIPOS','PANTALLA',NULL),(23,'EQUIPOS','PANTALLA',NULL),(24,'EQUIPOS','PANTALLA',NULL),(25,'EQUIPOS','PANTALLA',NULL),(26,'EQUIPOS','PANTALLA',NULL),(27,'EQUIPOS','PANTALLA',NULL),(28,'EQUIPOS','PANTALLA','aaaa'),(29,'EQUIPOS','PANTALLA','aaaa'),(30,'EQUIPOS','PANTALLA','aaaa'),(31,'EQUIPOS','PANTALLA','aaaa'),(32,'EQUIPOS','PANTALLA','bbbbbbb'),(33,'EQUIPOS','PANTALLA','bbbbbbb'),(34,'EQUIPOS','PANTALLA',NULL),(35,'EQUIPOS','PANTALLA',NULL),(36,'EQUIPOS','PANTALLA',NULL),(37,'EQUIPOS','PANTALLA',NULL),(38,'EQUIPOS','HOSTIAS',NULL),(39,'EQUIPOS','HOSTIAS',NULL),(40,'EQUIPOS','AAAA',NULL),(41,'EQUIPOS','AAAA',NULL);
+INSERT INTO `incidencias_subtipos` VALUES (1,'EQUIPOS','HOSTIAS',NULL),(2,'EQUIPOS','PC','RATÓN'),(3,'EQUIPOS','PC','TECLADO'),(4,'EQUIPOS','ALTAVOCES',NULL),(5,'EQUIPOS','MONITOR',NULL),(6,'EQUIPOS','PROYECTOR',NULL),(7,'EQUIPOS','PANTALLA',NULL),(8,'EQUIPOS','PANTALLA',NULL),(9,'EQUIPOS','PORTÁTIL','DE AULA'),(10,'EQUIPOS','IMPRESORA',NULL),(11,'CUENTAS','EDUCANTABRIA',NULL),(12,'CUENTAS','GOOGLE CLASSROOM',NULL),(13,'CUENTAS','DOMINIO',NULL),(14,'CUENTAS','YEDRA','GESTIONA J.EST.'),(15,'WIFI','iesmiguelherrero',NULL),(16,'WIFI','WIECAN',NULL),(17,'INTERNET','INSTALACIÓN',NULL),(18,'INTERNET','ACTUALIZACIÓN',NULL),(19,'EQUIPOS','PC','ZAP'),(20,'EQUIPOS','A','ORDENADOR'),(21,'EQUIPOS','A','ORDENADOR'),(22,'EQUIPOS','PANTALLA',NULL),(23,'EQUIPOS','PANTALLA',NULL),(24,'EQUIPOS','PANTALLA',NULL),(25,'EQUIPOS','PANTALLA',NULL),(26,'EQUIPOS','PANTALLA',NULL),(27,'EQUIPOS','PANTALLA',NULL),(28,'EQUIPOS','PANTALLA','aaaa'),(29,'EQUIPOS','PANTALLA','aaaa'),(30,'EQUIPOS','PANTALLA','aaaa'),(31,'EQUIPOS','PANTALLA','aaaa'),(32,'EQUIPOS','PANTALLA','bbbbbbb'),(33,'EQUIPOS','PANTALLA','bbbbbbb'),(34,'EQUIPOS','PANTALLA',NULL),(35,'EQUIPOS','PANTALLA',NULL),(36,'EQUIPOS','PANTALLA',NULL),(37,'EQUIPOS','PANTALLA',NULL),(38,'EQUIPOS','P',NULL),(39,'EQUIPOS','P',NULL),(40,'EQUIPOS','AAAA',NULL),(41,'EQUIPOS','AAAA',NULL);
 /*!40000 ALTER TABLE `incidencias_subtipos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -214,14 +214,14 @@ DROP TABLE IF EXISTS `perfiles`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `perfiles` (
   `personal_id` int NOT NULL,
-  `dominio` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `educantabria` varchar(50) COLLATE utf8mb3_spanish_ci NOT NULL,
-  `password` varchar(255) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `perfil` enum('administrador','profesor','otros') CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL DEFAULT 'profesor',
+  `dominio` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `educantabria` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `perfil` enum('administrador','profesor','otros') CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL DEFAULT 'profesor',
   PRIMARY KEY (`personal_id`),
   UNIQUE KEY `educantabria_UNIQUE` (`educantabria`),
   CONSTRAINT `fk_perfiles_personal` FOREIGN KEY (`personal_id`) REFERENCES `personal` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -243,21 +243,21 @@ DROP TABLE IF EXISTS `personal`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `dni` char(9) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `apellido1` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci NOT NULL,
-  `apellido2` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `direccion` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `localidad` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `cp` char(5) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
-  `tlf` char(9) CHARACTER SET utf8mb3 COLLATE utf8mb3_spanish_ci DEFAULT NULL,
+  `dni` char(9) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `apellido1` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci NOT NULL,
+  `apellido2` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `direccion` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `localidad` varchar(25) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cp` char(5) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tlf` char(9) CHARACTER SET utf8mb3 COLLATE utf8_spanish_ci DEFAULT NULL,
   `activo` tinyint DEFAULT '1',
   `departamento_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `dni_UNIQUE` (`dni`),
   KEY `fk_personal_departamentos1_idx` (`departamento_id`),
   CONSTRAINT `fk_personal_departamentos1` FOREIGN KEY (`departamento_id`) REFERENCES `departamentos` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb3 COLLATE=utf8_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,7 +291,7 @@ CREATE TABLE `usuarios_api` (
 
 LOCK TABLES `usuarios_api` WRITE;
 /*!40000 ALTER TABLE `usuarios_api` DISABLE KEYS */;
-INSERT INTO `usuarios_api` VALUES ('a','$2a$10$yZaHf0x9ZEyQtYmcZZh3nOSxi2Nm99rWwZJqBD1ecOUME1.dHPBEi','administrador'),('m','$2a$10$ZYWkm8sanOSQV5XR8E3mU.Y/5kaQnxxdciY3nAN9A80Fsvnvepqly','administrador');
+INSERT INTO `usuarios_api` VALUES ('a','$2a$10$yZaHf0x9ZEyQtYmcZZh3nOSxi2Nm99rWwZJqBD1ecOUME1.dHPBEi','administrador'),('b','$2a$10$NIMna9DVqog5NqrvszSvpei0dLqCNiXJcvgMVLneeel.w6OmDIS1W','profesor'),('m','$2a$10$ZYWkm8sanOSQV5XR8E3mU.Y/5kaQnxxdciY3nAN9A80Fsvnvepqly','administrador'),('z','$2a$10$4aycNgvIDVNyt6BZaZuR9.3KQjdbu8tjKJdiQYqY0g7SQzrriPV9W','profesor');
 /*!40000 ALTER TABLE `usuarios_api` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -304,4 +304,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-23  2:48:45
+-- Dump completed on 2024-02-26 19:21:13

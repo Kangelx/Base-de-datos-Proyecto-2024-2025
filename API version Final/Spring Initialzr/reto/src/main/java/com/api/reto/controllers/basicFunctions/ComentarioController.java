@@ -67,23 +67,21 @@ public class ComentarioController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAnyAuthority('administrador', 'profesor')")
     public Optional<ComentariosEntity> getComentarioById(@PathVariable Integer id) {
         return this.comentarioService.getById(id);
     }
 
     @PutMapping("")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAnyAuthority('administrador', 'profesor')")
     public ResponseEntity<?> updateComentarioById(@RequestBody ComentarioDTO request) {
         try {
 
             Integer id = request.getId();
 
-
             if (id != null) {
 
                 Optional<ComentariosEntity> optionalComentario = comentarioService.getById(id);
-
                 if (optionalComentario.isPresent()) {
                     ComentariosEntity comentario = optionalComentario.get();
 
@@ -94,15 +92,11 @@ public class ComentarioController {
                     if (personaQueComenta.isPresent() && incidenciaComentada.isPresent()) {
                         PersonalEntity persona = personaQueComenta.get();
                         IncidenciasEntity incidencia = incidenciaComentada.get();
-
-
                         comentario.setTexto(request.getTexto());
                         comentario.setFechahora(request.getFechahora());
                         comentario.setAdjuntoUrl(request.getAdjuntoUrl());
                         comentario.setPersonalId(persona);
                         comentario.setIncidenciaNum(incidencia);
-
-
                         comentarioService.saveComentario(comentario);
 
                         return ResponseEntity.ok(comentario);
@@ -126,7 +120,7 @@ public class ComentarioController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAnyAuthority('administrador', 'profesor')")
     public String deleteComentarioById(@PathVariable("id") Integer id) {
         boolean ok = this.comentarioService.deleteComentario(id);
         if (ok) {

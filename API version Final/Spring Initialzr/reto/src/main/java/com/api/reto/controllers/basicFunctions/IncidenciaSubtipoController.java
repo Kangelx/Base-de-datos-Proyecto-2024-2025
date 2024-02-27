@@ -68,7 +68,7 @@ public class IncidenciaSubtipoController {
     public String deleteById(@PathVariable("id") Integer id) {
         boolean ok = this.incidenciaSubtiposService.deleteIncidenciaSubtipo(id);
         if (ok) {
-            return "Aula con id " + id + " borrado.";
+            return "IncidenciaSubtipo con id " + id + " borrado.";
         } else {
             return "Error, no se encuentra el aula con id " + id + ".";
         }

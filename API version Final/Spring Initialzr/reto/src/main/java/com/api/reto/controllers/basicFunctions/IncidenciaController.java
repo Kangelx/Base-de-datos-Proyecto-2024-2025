@@ -114,7 +114,7 @@ public class IncidenciaController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('administrador')")
+    @PreAuthorize("hasAnyAuthority('administrador', 'profesor')")
     public Optional<IncidenciasEntity> getIncidenciaById(@PathVariable Integer id) {
         return this.incidenciaService.getById(id);
     }
