@@ -14,6 +14,7 @@
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ## [Documentación de la API](https://github.com/Kangelx/Base-de-datos-Proyecto-2024-2025/blob/main/DocumentacionAPI/DocumentacionGit.md)
+## [Documentación de la Seguridad (PSP)](https://github.com/Kangelx/Base-de-datos-Proyecto-2024-2025/blob/main/DocumentacionPSP/Documentacion%20PSP.md)
 
 ## [Autores del proyecto](#autores-del-proyecto)
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -32,5 +33,5 @@
 ### Python
 🐍: Rubén Cortés Muñoz
 
-### Base de datos
+### API y Seguridad (PSP)
 📁: Pablo Sainz Luque
